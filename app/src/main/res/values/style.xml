@@ -20,11 +20,22 @@
         <item name="android:textSize">20dp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:typeface">monospace</item>
-        <item name="android:paddingVertical" tools:targetApi="o">15dp</item>
+        <item name="android:paddingVertical" tools:targetApi="o">10dp</item>
         <item name="android:paddingHorizontal" tools:targetApi="o">86dp</item>
         <item name="android:fontFamily">@font/nunito_semibold</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/gender_confirm_button_gradient</item>
+    </style>
+
+    <style name="activity_heading">
+        <item name="android:textSize">33sp</item>
+        <item name="android:fontFamily">@font/nunito_semibold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="input_label">
+        <item name="android:textSize">17sp</item>
+        <item name="fontFamily">@font/nunito_regular</item>
     </style>
 </resources>

@@ -38,6 +38,20 @@ public class SignUpActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
     }
 
+    private void setBackGround() {
+        boolean isMen = getIntent().getExtras().getBoolean(SelectGenderActivity.GENDER);
+
+        System.out.println(this.view);
+
+        if (isMen) {
+            this.view.setBackgroundResource(R.drawable.select_gender_gradient_boy);
+        }
+
+        if (!isMen) {
+            this.view.setBackgroundResource(R.drawable.select_gender_gradient_girl);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,25 +68,10 @@ public class SignUpActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
-
-
         setContentView(R.layout.activity_sign_up);
-
-        boolean isMen = getIntent().getExtras().getBoolean(SelectGenderActivity.GENDER);
-
-        System.out.println("is men " + isMen);
 
         this.view = (View) findViewById(R.id.sign_up_view);
 
-        System.out.println(this.view);
-
-        if (isMen) {
-            this.view.setBackgroundResource(R.drawable.select_gender_gradient_boy);
-        }
-
-        if (!isMen) {
-            this.view.setBackgroundResource(R.drawable.select_gender_gradient_girl);
-        }
+        setBackGround();
     }
 }

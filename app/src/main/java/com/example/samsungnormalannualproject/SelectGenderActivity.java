@@ -2,13 +2,11 @@ package com.example.samsungnormalannualproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
-import android.telephony.ims.ImsManager;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -22,13 +20,13 @@ public class SelectGenderActivity extends AppCompatActivity {
 
     // ключи
     private static final String PREFS = "PREFS";
-    private static final String GENDER = "GENDER";
+    public static final String GENDER = "GENDER";
 
     private final String WOMEN_SELECTOR_KEY = "isClickedWomen";
     private final String MEN_SELECTOR_KEY = "isClickedMen";
 
 
-    private static String gender = "";
+    private boolean isMen = true;
 
     private static View view;
 
@@ -38,27 +36,27 @@ public class SelectGenderActivity extends AppCompatActivity {
             selectMenButton.setBackgroundResource(R.drawable.gender_selecion_button);
             selectWomenButton.setBackgroundColor(Color.TRANSPARENT);
             this.view.setBackgroundResource(R.drawable.select_gender_gradient_boy);
+            this.isMen = true;
         }
 
         if (!isClickedMen){
             selectWomenButton.setBackgroundResource(R.drawable.gender_selecion_button);
             selectMenButton.setBackgroundColor(Color.TRANSPARENT);
             this.view.setBackgroundResource(R.drawable.select_gender_gradient_girl);
+            this.isMen = false;
         }
     }
 
-    // сохраняем имя пользователся куда-то лакально
-    private void saveGender() {
-        if (SelectGenderActivity.gender != "") {
-            if (SelectGenderActivity.gender == "women" ||SelectGenderActivity.gender == "men") {
-                SharedPreferences sharedPreferences = getSharedPreferences(PREFS, MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString(GENDER, this.gender);
-                editor.commit();
-            }
-        }
+    private void startSignUpActivity() {
+        Intent intent = new Intent(this, SignUpActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(GENDER, this.isMen);
+        intent.putExtras(bundle);
+        System.out.println("Don't fuck " + this.isMen);
+        startActivity(intent);
     }
 
+    // скрывает боттом меню
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -73,6 +71,7 @@ public class SelectGenderActivity extends AppCompatActivity {
         }
     }
 
+    // скрывает топ меню и делаем приложения безрамочным
     public void hideSystemUI() {
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -110,6 +109,7 @@ public class SelectGenderActivity extends AppCompatActivity {
         this.confirmGenderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startSignUpActivity();
             }
         });
 

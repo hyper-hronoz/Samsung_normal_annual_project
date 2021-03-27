@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/select_gender_gradient_boy">
@@ -21,29 +21,40 @@
         style="@style/gender_confirm_button"
         android:layout_marginBottom="80dp"
         android:text="confirm"
-        app:backgroundTint="@null"
+        app:backgroundTint="#00FFFFFF"
+        app:backgroundTintMode="src_over"
+        app:iconTint="#00FFFFFF"
+        app:iconTintMode="src_over"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
+    <ImageButton
+        android:id="@+id/men_imageView"
         style="@style/gender_select_icons"
+        android:layout_marginEnd="184dp"
+        android:layout_marginRight="184dp"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.494"
+        app:layout_constraintVertical_bias="0.495"
         app:srcCompat="@drawable/ic_man_silhouette"
         app:tint="@android:color/white"
         tools:ignore="MissingConstraints,VectorDrawableCompat" />
 
-    <ImageView
-        android:id="@+id/imageView3"
+    <ImageButton
+        android:id="@+id/women_ImageButton"
         style="@style/gender_select_icons"
+        android:layout_marginStart="168dp"
+        android:layout_marginLeft="168dp"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.482"
+        app:layout_constraintVertical_bias="0.495"
         app:srcCompat="@drawable/ic_woman"
         app:tint="@android:color/white"
-        tools:ignore="VectorDrawableCompat" />
+        tools:ignore="MissingConstraints,VectorDrawableCompat" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

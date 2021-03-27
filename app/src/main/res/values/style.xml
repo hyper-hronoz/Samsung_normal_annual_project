@@ -9,6 +9,11 @@
         <item name="android:textSize">33sp</item>
     </style>
 
+    <style name="gender_select_icons">
+        <item name="android:layout_height">385dp</item>
+        <item name="android:layout_width">212dp</item>
+    </style>
+
     <style name="gender_confirm_button">
         <item name="android:textSize">20dp</item>
         <item name="android:textColor">@color/black</item>

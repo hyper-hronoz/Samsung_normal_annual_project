@@ -13,7 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class SignUpActivity extends AppCompatActivity {
+import com.example.samsungnormalannualproject.interfaces.ActivitySettings;
+
+public class SignUpActivity extends AppCompatActivity implements ActivitySettings {
 
     private View view;
     private Button confirmButton;
@@ -31,6 +33,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     // скрывает топ меню и делаем приложения безрамочным
+    @Override
     public void hideSystemUI() {
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
@@ -80,8 +83,6 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-        // сдесь у нас настройка активити берзрамочноая
-        hideSystemUI();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
         }
@@ -89,6 +90,9 @@ public class SignUpActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        // сдесь у нас настройка активити берзрамочноая
+        hideSystemUI();
 
         setContentView(R.layout.activity_sign_up);
 
@@ -103,6 +107,7 @@ public class SignUpActivity extends AppCompatActivity {
         this.keyBoardStateChangeListener();
     }
 
+    // слушаем открыта ли клава или нет
     private void keyBoardStateChangeListener() {
         this.view.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {

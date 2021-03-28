@@ -44,6 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
         );
     }
 
+    // паказывает нижнее меню когда приложение открыто
     public void showBottomNavBar() {
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
@@ -57,6 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
         );
     }
 
+    // устанавливает фон для элементов в зависимости от выбранного пола
     private void setBackGround() {
         boolean isMen = getIntent().getExtras().getBoolean(SelectGenderActivity.GENDER);
 
@@ -90,6 +92,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_sign_up);
 
+        // ну здесь мы присваем значения для полей
         this.view = (View) findViewById(R.id.sign_up_view);
         this.confirmButton = (Button) findViewById(R.id.confirm_sign_up_button);
         this.nickNameEditText = (EditText) findViewById(R.id.editText_password);

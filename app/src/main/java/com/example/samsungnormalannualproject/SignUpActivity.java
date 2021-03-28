@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.example.samsungnormalannualproject.interfaces.ActivitySettings;
 
-public class SignUpActivity extends AppCompatActivity implements ActivitySettings {
+public class SignUpActivity extends AppCompatActivity implements ActivitySettings, ActivityWithEditText {
 
     private View view;
     private Button confirmButton;
@@ -82,19 +82,16 @@ public class SignUpActivity extends AppCompatActivity implements ActivitySetting
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
         }
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        // сдесь у нас настройка активити берзрамочноая
-        hideSystemUI();
 
         setContentView(R.layout.activity_sign_up);
+
+        hideSystemUI();
 
         // ну здесь мы присваем значения для полей
         this.view = (View) findViewById(R.id.sign_up_view);
@@ -108,14 +105,15 @@ public class SignUpActivity extends AppCompatActivity implements ActivitySetting
     }
 
     // слушаем открыта ли клава или нет
-    private void keyBoardStateChangeListener() {
-        this.view.getViewTreeObserver().addOnGlobalLayoutListener(
+    @Override
+    public void keyBoardStateChangeListener() {
+        getWindow().getDecorView().getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
                         Rect r = new Rect();
-                        view.getWindowVisibleDisplayFrame(r);
-                        int screenHeight = view.getRootView().getHeight();
+                        getWindow().getDecorView().getWindowVisibleDisplayFrame(r);
+                        int screenHeight = getWindow().getDecorView().getRootView().getHeight();
                         int keypadHeight = screenHeight - r.bottom;
                         if (keypadHeight > screenHeight * 0.15) {
                             showBottomNavBar();

@@ -18,6 +18,28 @@ public class LoginOrSignUp extends AppCompatActivity implements ActivitySettings
     private Button signUpButton;
 
     @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            hideSystemUI();
+        }
+    }
+
+    @Override
+    public void hideSystemUI() {
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LOW_PROFILE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        );
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -29,12 +51,12 @@ public class LoginOrSignUp extends AppCompatActivity implements ActivitySettings
         getSupportActionBar().hide();
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        hideSystemUI();
+        setContentView(R.layout.activity_login_or_sign_up);
 
         this.loginButton = (Button) findViewById(R.id.login_or_sign_up_login_button);
         this.signUpButton = (Button) findViewById(R.id.login_or_sign_up_sign_up_button);
 
-        setContentView(R.layout.activity_login_or_sign_up);
+        System.out.println(this.loginButton);
 
         this.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,31 +69,9 @@ public class LoginOrSignUp extends AppCompatActivity implements ActivitySettings
         this.signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SelectGenderActivity.class);
                 startActivity(intent);
             }
         });
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            hideSystemUI();
-        }
-    }
-
-    @Override
-    public void hideSystemUI() {
-        getWindow().getDecorView().setSystemUiVisibility(
-            View.SYSTEM_UI_FLAG_IMMERSIVE
-            | View.SYSTEM_UI_FLAG_FULLSCREEN
-            | View.SYSTEM_UI_FLAG_LOW_PROFILE
-            | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-        );
     }
 }

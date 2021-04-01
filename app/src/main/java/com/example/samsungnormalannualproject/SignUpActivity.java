@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
@@ -19,12 +17,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.samsungnormalannualproject.interfaces.ActivitySettings;
-
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -113,9 +108,9 @@ public class SignUpActivity extends AppCompatActivity implements ActivitySetting
 
         // ну здесь мы присваем значения для полей
         this.view = (View) findViewById(R.id.sign_up_view);
-        this.confirmButton = (Button) findViewById(R.id.confirm_sign_up_button);
-        this.nickNameEditText = (EditText) findViewById(R.id.editText_nickname);
-        this.passwordEditText = (EditText) findViewById(R.id.editText_password);
+        this.confirmButton = (Button) findViewById(R.id.login_confirm);
+        this.nickNameEditText = (EditText) findViewById(R.id.login_login);
+        this.passwordEditText = (EditText) findViewById(R.id.login_password);
         this.passwordAgainEditText = (EditText) findViewById(R.id.editText_password_again);
 
         this.isMen = getIntent().getExtras().getBoolean(SelectGenderActivity.GENDER);
@@ -142,7 +137,7 @@ public class SignUpActivity extends AppCompatActivity implements ActivitySetting
     }
 
     public void postNewUser(){
-        String url = "https://shy-rattlesnake-97.loca.lt/auth/registration";
+        String url = "https://heavy-moose-70.loca.lt/auth/registration";
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
                 url,

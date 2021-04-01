@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
@@ -13,7 +15,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.samsungnormalannualproject.interfaces.ActivitySettings;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity implements ActivitySettings, ActivityWithEditText {
 
@@ -22,6 +36,11 @@ public class SignUpActivity extends AppCompatActivity implements ActivitySetting
     private EditText nickNameEditText;
     private EditText passwordEditText;
     private EditText passwordAgainEditText;
+
+    private boolean isMen;
+
+    private String nickName;
+    private String password;
 
     // скрывает боттом меню при потере фокуса
     @Override
@@ -63,16 +82,15 @@ public class SignUpActivity extends AppCompatActivity implements ActivitySetting
 
     // устанавливает фон для элементов в зависимости от выбранного пола
     private void setBackGround() {
-        boolean isMen = getIntent().getExtras().getBoolean(SelectGenderActivity.GENDER);
 
         System.out.println(this.view);
 
-        if (isMen) {
+        if (this.isMen) {
             this.view.setBackgroundResource(R.drawable.select_gender_gradient_boy);
             this.confirmButton.setBackgroundResource(R.drawable.login_regirstrate_button_background_boy);
         }
 
-        if (!isMen) {
+        if (!this.isMen) {
             this.view.setBackgroundResource(R.drawable.select_gender_gradient_girl);
             this.confirmButton.setBackgroundResource(R.drawable.login_registrate_button_background_girl);
         }
@@ -96,12 +114,76 @@ public class SignUpActivity extends AppCompatActivity implements ActivitySetting
         // ну здесь мы присваем значения для полей
         this.view = (View) findViewById(R.id.sign_up_view);
         this.confirmButton = (Button) findViewById(R.id.confirm_sign_up_button);
-        this.nickNameEditText = (EditText) findViewById(R.id.editText_password);
+        this.nickNameEditText = (EditText) findViewById(R.id.editText_nickname);
         this.passwordEditText = (EditText) findViewById(R.id.editText_password);
         this.passwordAgainEditText = (EditText) findViewById(R.id.editText_password_again);
 
+        this.isMen = getIntent().getExtras().getBoolean(SelectGenderActivity.GENDER);
+
         this.setBackGround();
         this.keyBoardStateChangeListener();
+
+        this.confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getEditTextData();
+            }
+        });
+    }
+
+    private void getEditTextData() {
+        if (this.passwordEditText.getText().toString().equals(this.passwordAgainEditText.getText().toString())) {
+            this.nickName = this.nickNameEditText.getText().toString();
+            this.password = this.passwordEditText.getText().toString();
+            postNewUser();
+        } else {
+            System.out.println("Не совпадают");
+        }
+    }
+
+    public void postNewUser(){
+        String url = "https://shy-rattlesnake-97.loca.lt/auth/registration";
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(getApplicationContext(),response.trim(),Toast.LENGTH_LONG).show();
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("username", nickName);
+                params.put("password", password);
+                return params;
+            }
+
+//            @Override
+//            public Map<String, String> getHeaders() {
+//                HashMap<String, String> params = new HashMap<String, String>();
+//                params.put("Content-Type", "application/json");
+//                return params;
+//            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
+
+
+    public interface PostCommentResponseListener {
+        public void requestStarted();
+        public void requestCompleted();
+        public void requestEndedWithError(VolleyError error);
     }
 
     // слушаем открыта ли клава или нет

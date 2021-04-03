@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SamsungNormalAnnualProject">
-        <activity android:name=".SignUpFrom"></activity>
+        <activity android:name=".BaseActivity"></activity>
+        <activity android:name=".SignUpFrom" />
         <activity android:name=".LoginOrSignUp" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />

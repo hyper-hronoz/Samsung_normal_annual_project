@@ -25,7 +25,7 @@ import com.example.samsungnormalannualproject.interfaces.ActivitySettings;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SignUpActivity extends AppCompatActivity implements ActivitySettings, ActivityWithEditText {
+public class SignUpActivity extends AppCompatActivity implements ActivitySettings {
 
     private View view;
     private Button confirmButton;

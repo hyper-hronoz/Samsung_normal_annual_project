@@ -10,7 +10,7 @@ import android.view.WindowManager;
 
 import com.example.samsungnormalannualproject.interfaces.ActivitySettings;
 
-public class SignUpFrom extends AppCompatActivity implements ActivitySettings {
+public class SignUpFrom extends BaseActivity {
     private boolean isMen = false;
 
     private View view;

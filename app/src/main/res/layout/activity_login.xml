@@ -14,7 +14,7 @@
         >
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/activity_heading"
             style="@style/activity_heading"
             android:text="Login"/>
 

@@ -21,7 +21,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/activity_heading"
                 style="@style/activity_heading"
                 android:text="Write a little about  \n yourself!" />
 
@@ -145,6 +145,90 @@
 
                     <Spinner
                         android:id="@+id/eyes_color_spinner1"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/spinner"
+                        android:layout_height="40dp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="40dp"
+                    >
+
+                    <TextView
+                        style="@style/input_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="Color of eyes" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="30dp"
+                        tools:text="no matter" />
+
+                    <Spinner
+                        android:id="@+id/eyes_color_spinner7"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/spinner"
+                        android:layout_height="40dp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="40dp"
+                    >
+
+                    <TextView
+                        style="@style/input_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="Color of eyes" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="30dp"
+                        tools:text="no matter" />
+
+                    <Spinner
+                        android:id="@+id/eyes_color_spinner5"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/spinner"
+                        android:layout_height="40dp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="40dp"
+                    >
+
+                    <TextView
+                        style="@style/input_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="Color of eyes" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="30dp"
+                        tools:text="no matter" />
+
+                    <Spinner
+                        android:id="@+id/eyes_color_spinner4"
                         android:layout_width="match_parent"
                         android:background="@drawable/spinner"
                         android:layout_height="40dp"

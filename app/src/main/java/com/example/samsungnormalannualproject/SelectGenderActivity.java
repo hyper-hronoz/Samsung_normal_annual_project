@@ -52,7 +52,7 @@ public class SelectGenderActivity extends AppCompatActivity implements ActivityS
     private void startSignUpActivity() {
         Intent intent = new Intent(this, SignUpActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putBoolean(GENDER, this.isMen);
+        bundle.putBoolean(this.GENDER, this.isMen);
         intent.putExtras(bundle);
         System.out.println("Don't fuck " + this.isMen);
         startActivity(intent);

@@ -2,6 +2,7 @@ package com.example.samsungnormalannualproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
@@ -130,7 +131,13 @@ public class SignUpActivity extends AppCompatActivity implements ActivitySetting
         if (this.passwordEditText.getText().toString().equals(this.passwordAgainEditText.getText().toString())) {
             this.nickName = this.nickNameEditText.getText().toString();
             this.password = this.passwordEditText.getText().toString();
-            postNewUser();
+            Intent intent = new Intent(this, SignUpFrom.class);
+            Bundle bundle = new Bundle();
+            bundle.putBoolean(SelectGenderActivity.GENDER, this.isMen);
+            intent.putExtras(bundle);
+            startActivity(intent);
+//            postNewUser();
+
         } else {
             System.out.println("Не совпадают");
         }

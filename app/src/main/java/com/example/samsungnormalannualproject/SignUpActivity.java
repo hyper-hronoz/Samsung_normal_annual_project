@@ -131,7 +131,7 @@ public class SignUpActivity extends AppCompatActivity implements ActivitySetting
         if (this.passwordEditText.getText().toString().equals(this.passwordAgainEditText.getText().toString())) {
             this.nickName = this.nickNameEditText.getText().toString();
             this.password = this.passwordEditText.getText().toString();
-            Intent intent = new Intent(this, SignUpFrom.class);
+            Intent intent = new Intent(this, SignUpForm.class);
             Bundle bundle = new Bundle();
             bundle.putBoolean(SelectGenderActivity.GENDER, this.isMen);
             intent.putExtras(bundle);

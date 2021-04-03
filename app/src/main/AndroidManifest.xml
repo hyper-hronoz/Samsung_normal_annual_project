@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SamsungNormalAnnualProject">
         <activity android:name=".BaseActivity"></activity>
-        <activity android:name=".SignUpFrom" />
+        <activity android:name=".SignUpForm" />
         <activity android:name=".LoginOrSignUp" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />

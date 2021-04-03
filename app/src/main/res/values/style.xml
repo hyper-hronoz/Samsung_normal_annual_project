@@ -30,7 +30,7 @@
 
     <style name="activity_heading">
         <item name="android:textSize">33sp</item>
-        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_height">150dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:fontFamily">@font/nunito_semibold</item>
         <item name="android:textColor">@color/white</item>

@@ -38,6 +38,19 @@ public class SignUpActivity extends BaseActivity {
     private String nickName;
     private String password;
 
+    private void setBackGround() {
+
+        System.out.println(this.view);
+
+        if (this.isMen) {
+            this.view.setBackgroundResource(R.drawable.select_gender_gradient_boy);
+        }
+
+        if (!this.isMen) {
+            this.view.setBackgroundResource(R.drawable.select_gender_gradient_girl);
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +67,9 @@ public class SignUpActivity extends BaseActivity {
         this.passwordAgainEditText = (EditText) findViewById(R.id.editText_password_again);
 
         this.isMen = getIntent().getExtras().getBoolean(SelectGenderActivity.GENDER);
+        setBackGround();
+
+        BaseActivity.activityHeading = findViewById(R.id.activity_heading);
 
 
         this.confirmButton.setOnClickListener(new View.OnClickListener() {

@@ -63,7 +63,7 @@ public class SignUpForm extends BaseActivity  implements AdapterView.OnItemSelec
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
+        return;
     }
 
     @Override

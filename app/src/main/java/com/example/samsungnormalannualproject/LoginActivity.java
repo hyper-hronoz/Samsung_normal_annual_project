@@ -44,6 +44,8 @@ public class LoginActivity extends BaseActivity {
         this.passwordEditText = findViewById(R.id.login_password);
         this.button = findViewById(R.id.login_confirm);
 
+        BaseActivity.activityHeading = findViewById(R.id.activity_heading);
+
         this.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

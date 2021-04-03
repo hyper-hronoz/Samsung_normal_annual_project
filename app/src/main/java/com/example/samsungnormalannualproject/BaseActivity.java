@@ -15,7 +15,7 @@ import com.example.samsungnormalannualproject.interfaces.ActivitySettings;
 
 public class BaseActivity extends AppCompatActivity implements ActivitySettings {
     // паказывает нижнее меню когда приложение открыто
-    private TextView activityHeading;
+    public static TextView activityHeading;
 
     @Override
     public void keyBoardStateChangeListener() {
@@ -36,41 +36,40 @@ public class BaseActivity extends AppCompatActivity implements ActivitySettings 
                 });
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            hideSystemUI();
-        }
-    }
+//    @Override
+//    public void onWindowFocusChanged(boolean hasFocus) {
+//        super.onWindowFocusChanged(hasFocus);
+//        if (hasFocus) {
+//            hideSystemUI();
+//        }
+//    }
 
     @Override
     public void showBottomNavBar() {
-        try {
-            activityHeading.setVisibility(View.VISIBLE);
-        } catch (Exception e) {
-
-        }
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_IMMERSIVE
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_LOW_PROFILE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_VISIBLE // именно это поле и меняет состояние нижнего меню
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-        );
-    }
-
-    @Override
-    public void hideSystemUI() {
         try {
             activityHeading.setVisibility(View.GONE);
         } catch (Exception e) {
 
         }
+//        getWindow().getDecorView().setSystemUiVisibility(
+//                View.SYSTEM_UI_FLAG_IMMERSIVE
+//                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+//                        | View.SYSTEM_UI_FLAG_LOW_PROFILE
+//                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+//                        | View.SYSTEM_UI_FLAG_VISIBLE // именно это поле и меняет состояние нижнего меню
+//                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+//                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+//        );
+    }
 
+    @Override
+    public void hideSystemUI() {
+        try {
+            activityHeading.setVisibility(View.VISIBLE);
+        } catch (Exception e) {
+
+        }
 //        getWindow().getDecorView().setSystemUiVisibility(
 //                View.SYSTEM_UI_FLAG_IMMERSIVE
 //                        | View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -95,11 +94,6 @@ public class BaseActivity extends AppCompatActivity implements ActivitySettings 
         getSupportActionBar().hide();
 //        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        try {
-            this.activityHeading = findViewById(R.id.activity_heading);
-        } catch (Exception e) {
-
-        }
         hideSystemUI();
         keyBoardStateChangeListener();
     }

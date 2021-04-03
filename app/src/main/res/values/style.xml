@@ -30,17 +30,36 @@
 
     <style name="activity_heading">
         <item name="android:textSize">33sp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:fontFamily">@font/nunito_semibold</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:gravity">left|center_vertical</item>
     </style>
 
     <style name="input_label">
         <item name="android:textSize">17sp</item>
         <item name="fontFamily">@font/nunito_regular</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentStart">true</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+    </style>
+
+    <style name="input">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginBottom">40dp</item>
     </style>
 
     <style name="login_registrate_button" parent="gender_confirm_button">
-        <item name="background">@drawable/login_regirstrate_button_background_boy</item>
+        <item name="android:background">@drawable/login_regirstrate_button_background_boy</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 </resources>

@@ -16,14 +16,7 @@
         <TextView
             android:id="@+id/textView2"
             style="@style/activity_heading"
-            android:layout_width="fill_parent"
-            android:layout_height="90dp"
-            android:gravity="center"
-            android:text="Login"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="Login"/>
 
         <LinearLayout
             android:layout_weight="80"
@@ -36,53 +29,27 @@
             <TextView
                 android:id="@+id/textView3"
                 style="@style/input_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/login_password"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
                 android:text="nickname" />
 
             <EditText
                 android:id="@+id/login_login"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:ems="10"
-                android:layout_marginBottom="40dp"
+                style="@style/input"
                 android:inputType="text" />
 
 
             <TextView
                 android:id="@+id/textView4"
                 style="@style/input_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/login_password"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
                 android:text="password" />
 
             <EditText
                 android:id="@+id/login_password"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:ems="10"
-                android:layout_marginBottom="40dp"
+                style="@style/input"
                 android:inputType="textPassword" />
 
             <Button
                 android:id="@+id/login_confirm"
                 style="@style/login_registrate_button"
-                android:layout_gravity="center"
-                android:background="@drawable/login_regirstrate_button_background_boy"
                 android:text="Confirm"
                 app:backgroundTint="#00FFFFFF"
                 app:backgroundTintMode="src_over" />

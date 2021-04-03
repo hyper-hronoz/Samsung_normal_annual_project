@@ -17,14 +17,7 @@
         <TextView
             android:id="@+id/textView2"
             style="@style/activity_heading"
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:gravity="center"
-            android:text="Sign up"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="Sign up"/>
 
 
         <LinearLayout
@@ -38,12 +31,6 @@
             <TextView
                 android:id="@+id/textView3"
                 style="@style/input_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/login_password"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
                 android:text="nickname" />
 
             <EditText
@@ -61,12 +48,6 @@
             <TextView
                 android:id="@+id/textView4"
                 style="@style/input_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/login_password"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
                 android:text="password" />
 
             <EditText
@@ -84,12 +65,7 @@
             <TextView
                 android:id="@+id/textView5"
                 style="@style/input_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_above="@+id/login_password"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
                 android:text="password again" />
 
             <EditText

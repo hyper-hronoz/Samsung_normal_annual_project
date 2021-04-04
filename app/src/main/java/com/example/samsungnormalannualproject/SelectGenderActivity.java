@@ -33,20 +33,23 @@ public class SelectGenderActivity extends BaseActivity {
     private static View view;
 
     // здесь меняется выбранный элемент
-    private void changeGenderSelection(boolean isClickedMen) {
-        if (isClickedMen) {
+    private void changeGenderSelection() {
+        System.out.println(this.isMen);
+        if (isMen) {
             selectMenButton.setBackgroundResource(R.drawable.gender_selecion_button);
             selectWomenButton.setBackgroundColor(Color.TRANSPARENT);
             this.view.setBackgroundResource(R.drawable.select_gender_gradient_boy);
-            this.isMen = true;
         }
 
-        if (!isClickedMen){
+        if (!isMen){
             selectWomenButton.setBackgroundResource(R.drawable.gender_selecion_button);
             selectMenButton.setBackgroundColor(Color.TRANSPARENT);
             this.view.setBackgroundResource(R.drawable.select_gender_gradient_girl);
-            this.isMen = false;
         }
+    }
+
+    private void changeGender() {
+        this.isMen = !isMen;
     }
 
     private void startSignUpActivity() {
@@ -82,7 +85,8 @@ public class SelectGenderActivity extends BaseActivity {
         this.selectMenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeGenderSelection(true);
+                changeGender();
+                changeGenderSelection();
             }
         });
 
@@ -90,8 +94,11 @@ public class SelectGenderActivity extends BaseActivity {
         this.selectWomenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeGenderSelection(false);
+                changeGender();
+                changeGenderSelection();
             }
         });
+
+        changeGenderSelection();
     }
 }

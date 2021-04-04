@@ -8,87 +8,96 @@
     android:layout_height="match_parent"
     tools:context=".SignUpActivity">
 
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-
-        <TextView
-            android:id="@+id/activity_heading"
-            style="@style/activity_heading"
-            android:text="Sign up"/>
-
+        android:layout_height="fill_parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="80"
-            android:background="@drawable/login_registrate_background"
-            android:orientation="vertical"
-            android:padding="50dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView3"
-                style="@style/input_label"
-                android:text="nickname" />
+                android:id="@+id/activity_heading"
+                style="@style/activity_heading"
+                android:text="Sign up" />
 
-            <EditText
-                android:id="@+id/login_login"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:ems="10"
-                android:layout_marginBottom="40dp"
-                android:inputType="text" />
+                android:layout_height="match_parent"
+                android:background="@drawable/login_registrate_background"
+                android:orientation="vertical"
+                android:padding="50dp">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    style="@style/input_label"
+                    android:text="nickname" />
+
+                <EditText
+                    android:id="@+id/login_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="40dp"
+                    android:ems="10"
+                    android:inputType="text" />
 
 
-            <TextView
-                android:id="@+id/textView4"
-                style="@style/input_label"
-                android:text="password" />
+                <TextView
+                    android:id="@+id/textView4"
+                    style="@style/input_label"
+                    android:text="password" />
 
-            <EditText
-                android:id="@+id/login_password"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:ems="10"
-                android:layout_marginBottom="40dp"
-                android:inputType="textPassword" />
+                <EditText
+                    android:id="@+id/login_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="40dp"
+                    android:ems="10"
+                    android:inputType="textPassword" />
 
 
-            <TextView
-                android:id="@+id/textView5"
-                style="@style/input_label"
-                android:layout_above="@+id/login_password"
-                android:text="password again" />
+                <TextView
+                    android:id="@+id/textView5"
+                    style="@style/input_label"
+                    android:layout_above="@+id/login_password"
+                    android:text="password again" />
 
-            <EditText
-                android:id="@+id/editText_password_again"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:ems="10"
-                android:layout_marginBottom="50dp"
-                android:inputType="textPassword" />
+                <EditText
+                    android:id="@+id/editText_password_again"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="50dp"
+                    android:ems="10"
+                    android:inputType="textPassword" />
 
-            <Button
-                android:id="@+id/login_confirm"
-                style="@style/login_registrate_button"
-                android:layout_gravity="center"
-                android:background="@drawable/login_regirstrate_button_background_boy"
-                android:text="Confirm"
-                app:backgroundTint="#00FFFFFF"
-                app:backgroundTintMode="src_over" />
+                <Button
+                    android:id="@+id/login_confirm"
+                    style="@style/login_registrate_button"
+                    android:layout_gravity="center"
+                    android:background="@drawable/login_regirstrate_button_background_boy"
+                    android:text="Confirm"
+                    app:backgroundTint="#00FFFFFF"
+                    app:backgroundTintMode="src_over" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

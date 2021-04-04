@@ -2,6 +2,7 @@ package com.example.samsungnormalannualproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 
 import com.example.samsungnormalannualproject.interfaces.ActivitySettings;
@@ -17,6 +20,8 @@ public class SignUpForm extends BaseActivity  implements AdapterView.OnItemSelec
 
     private View view;
     private Spinner eyes_color_spinner;
+
+    private Button button;
 
     private static final String[] paths = {"item 1", "item 2", "item 3"};
 
@@ -74,9 +79,22 @@ public class SignUpForm extends BaseActivity  implements AdapterView.OnItemSelec
 
         this.isMen = getIntent().getExtras().getBoolean(SelectGenderActivity.GENDER);
         this.view = findViewById(R.id.sign_up_fill_form_view);
+        this.button = findViewById(R.id.confirm_button);
 
         setBackGround();
 
         spinner();
+
+        this.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), WhatKindOfPeopleLookinFor.class);
+                startActivity(intent);
+            }
+        });
+
+
+//        RadioButton simpleRadioButton=(RadioButton) findViewById(R.id.hello_world);
+//        simpleRadioButton.setText("I am a radiobutton"); // displayed text of radio button
     }
 }

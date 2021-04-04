@@ -2,11 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/sign_up_fill_form_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/select_gender_gradient_boy"
-    tools:context=".SignUpForm">
+    tools:context=".WhatKindOfPeopleLookinFor">
 
 
     <ScrollView
@@ -23,7 +22,7 @@
             <TextView
                 android:id="@+id/activity_heading"
                 style="@style/activity_heading"
-                android:text="Write a little about  \n yourself!" />
+                android:text="What kind of people \nyou are looking for" />
 
 
             <LinearLayout
@@ -221,7 +220,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
-                        android:text="Write a little about our self" />
+                        android:text="Add something you wanna find" />
 
                     <EditText
                         android:padding="5dp"
@@ -236,7 +235,6 @@
 
 
                 <Button
-                    android:id="@+id/confirm_button"
                     style="@style/login_registrate_button"
                     android:layout_gravity="left"
                     android:background="@drawable/login_regirstrate_button_background_boy"
@@ -247,4 +245,5 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

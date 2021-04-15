@@ -7,36 +7,62 @@
     android:padding="16dp"
     android:layout_height="fill_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/firstInfo"
+        android:weightSum="2">
 
-        <TextView
-            android:id="@+id/nomination_heading"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="Elena Elaza"/>
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/nomination_age"
+            <TextView
+                android:id="@+id/nomination_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="Elena Elaza"
+                android:textColor="@color/black"
+                android:textSize="33dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="age 24" />
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:gravity="right">
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/nomination_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:fontFamily="@font/nunito_semibold"
+                android:paddingBottom="4dp"
+                android:text="age 24"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/firstInfo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="17dp"
         android:adjustViewBounds="true"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@mipmap/ic_launcher_foreground"
+        tools:ignore="VectorDrawableCompat" />
 
     <TextView
         android:id="@+id/textView8"

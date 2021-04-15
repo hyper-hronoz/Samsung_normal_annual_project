@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SamsungNormalAnnualProject">
-        <activity android:name=".WhatKindOfPeopleLookinFor"></activity>
+        <activity android:name=".ViewingNominationsActvity"></activity>
+        <activity android:name=".WhatKindOfPeopleLookinFor" />
         <activity android:name=".BaseActivity" />
         <activity android:name=".SignUpForm" />
         <activity android:name=".LoginOrSignUp" />

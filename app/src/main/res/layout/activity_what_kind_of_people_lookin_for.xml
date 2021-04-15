@@ -223,18 +223,19 @@
                         android:text="Add something you wanna find" />
 
                     <EditText
-                        android:padding="5dp"
                         android:id="@+id/editTextTextMultiLine"
                         android:layout_width="match_parent"
                         android:layout_height="195dp"
                         android:background="@drawable/spinner"
                         android:ems="10"
                         android:gravity="start|top"
-                        android:inputType="textMultiLine" />
+                        android:inputType="textMultiLine"
+                        android:padding="5dp" />
                 </LinearLayout>
 
 
                 <Button
+                    android:id="@+id/confirm_button"
                     style="@style/login_registrate_button"
                     android:layout_gravity="left"
                     android:background="@drawable/login_regirstrate_button_background_boy"

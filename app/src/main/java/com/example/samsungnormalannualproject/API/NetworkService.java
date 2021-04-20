@@ -13,10 +13,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkService {
     private static NetworkService mInstance;
-    private static final String BASE_URL = "http://" + Config.DOMAIN;
+    private static final String BASE_URL = "http://" + Config.DOMAIN + ":" + Config.PORT;
     private Retrofit mRetrofit;
+    private User user;
 
-    public NetworkService() {
+    public NetworkService(User user) {
+        this.user = user;
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -24,7 +26,7 @@ public class NetworkService {
 
         JSONPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JSONPlaceHolderApi.class);
 
-        Call<NetworkServiceResponse> call = jsonPlaceHolderApi.registerUser();
+        Call<NetworkServiceResponse> call = jsonPlaceHolderApi.registerUser(user);
 
         call.enqueue(new Callback<NetworkServiceResponse>() {
             @Override

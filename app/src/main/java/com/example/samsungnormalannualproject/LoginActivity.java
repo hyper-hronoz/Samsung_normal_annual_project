@@ -58,7 +58,6 @@ public class LoginActivity extends BaseActivity {
     private void login() {
         this.login = this.loginEditText.getText().toString();
         this.password = this.passwordEditText.getText().toString();
-
     }
 
 

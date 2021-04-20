@@ -2,14 +2,21 @@ package com.example.samsungnormalannualproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.samsungnormalannualproject.API.JSONPlaceHolderApi;
 import com.example.samsungnormalannualproject.API.NetworkService;
+import com.example.samsungnormalannualproject.API.NetworkServiceResponse;
 import com.example.samsungnormalannualproject.Erors.UserErrors.ToastError;
 import com.example.samsungnormalannualproject.Models.User;
 import com.example.samsungnormalannualproject.Utils.FormValidator;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignUpActivity extends BaseActivity {
 
@@ -122,8 +129,12 @@ public class SignUpActivity extends BaseActivity {
     }
 
     public void postNewUser(){
-        User user = new User(this.login, this.password);
-        new NetworkService();
+        User user = new User(this.login, this.password, "M");
+        new NetworkService(user);
+
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+
 //        String url = "http://192.168.0.15:3000/auth/registration";
 //        StringRequest stringRequest = new StringRequest(
 //                Request.Method.POST,

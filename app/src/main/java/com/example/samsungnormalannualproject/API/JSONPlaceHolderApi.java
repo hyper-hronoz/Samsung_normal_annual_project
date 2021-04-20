@@ -9,5 +9,8 @@ import retrofit2.http.POST;
 
 public interface JSONPlaceHolderApi {
     @POST("/auth/registration")
-    Call<NetworkServiceResponse> registerUser();
+    Call<NetworkServiceResponse> registerUser(@Body User user);
+
+    @POST("/auth/login")
+    Call<NetworkServiceResponse> loginUser(@Body User user);
 }

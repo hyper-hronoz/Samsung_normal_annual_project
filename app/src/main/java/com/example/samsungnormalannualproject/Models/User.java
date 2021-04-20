@@ -1,20 +1,30 @@
 package com.example.samsungnormalannualproject.Models;
 
 public class User {
-    public String login;
+    public String username;
     public String password;
+    public String gender;
 
-    public User(String login, String password) {
-        this.login = login;
+    public User(String login, String password, String gender) {
+        this.username = login;
         this.password = password;
+        this.gender = gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getGender() {
+        return gender;
     }
 
     public void setEmail(String email) {
-        this.login = email;
+        this.username = email;
     }
 
     public String getEmail() {
-        return login;
+        return username;
     }
 
     public void setPassword(String password) {

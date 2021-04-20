@@ -97,7 +97,7 @@ public class SignUpActivity extends BaseActivity {
     }
 
     public void postNewUser(){
-        String url = "https://heavy-moose-70.loca.lt/auth/registration";
+        String url = "http://192.168.0.15:3000/auth/registration";
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
                 url,

@@ -1,14 +1,7 @@
 package com.example.samsungnormalannualproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.graphics.Rect;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,7 +12,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.samsungnormalannualproject.interfaces.ActivitySettings;
+import com.example.samsungnormalannualproject.Models.User;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,10 +48,9 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void login() {
-        this.login = this.loginEditText.getText().toString();
-        this.password = this.passwordEditText.getText().toString();
+        User user = new User(this.loginEditText.getText().toString(), this.passwordEditText.getText().toString());
 
-        String url = "https://fuzzy-rat-61.loca.lt/auth/login";
+        String url = "http://192.168.0.15:3000/auth/login";
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
                 url,

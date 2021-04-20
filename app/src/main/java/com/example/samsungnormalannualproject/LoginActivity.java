@@ -1,6 +1,7 @@
 package com.example.samsungnormalannualproject;
 
 import android.os.Bundle;
+import retrofit2.Call;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,36 +59,7 @@ public class LoginActivity extends BaseActivity {
         this.login = this.loginEditText.getText().toString();
         this.password = this.passwordEditText.getText().toString();
 
-        Boolean isValidLogin = false;
-        Boolean isValidPassword = false;
-
-        if (new FormValidator(login).setMinLength(4)) {
-            isValidLogin = true;
-        }
-        if (new FormValidator(password).setMinLength(8)) {
-            isValidPassword = true;
-        }
-
-        if (isValidLogin && isValidPassword) {
-            User user = new User(this.login, this.password);
-            Call<NetworkResponse> call = JSONPlaceHolderApi.registerUser(user);
-            call.enqueue(new Callback<NetworkServiceResponse() {
-                @Override
-                public void onResponse(Response<NetworkServiceResponse> response) {
-                    if (response.isSuccess()) {
-                        // tasks available
-                    } else {
-                        // error response, no access to resource?
-                    }
-                }
-
-                @Override
-                public void onFailure(Throwable t) {
-                }
-            }
-        }
-
-        String url = "/auth/login";
+    }
 
 
 
@@ -119,5 +91,4 @@ public class LoginActivity extends BaseActivity {
 //        };
 //        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 //        requestQueue.add(stringRequest);
-    }
 }

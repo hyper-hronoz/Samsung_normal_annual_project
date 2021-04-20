@@ -1,23 +1,43 @@
 package com.example.samsungnormalannualproject.API;
 
 import com.example.samsungnormalannualproject.Config;
+import com.example.samsungnormalannualproject.Models.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-class NetworkService {
+public class NetworkService {
     private static NetworkService mInstance;
-    private static final String BASE_URL = "https://" + Config.DOMAIN;
+    private static final String BASE_URL = "http://" + Config.DOMAIN;
     private Retrofit mRetrofit;
 
-    private NetworkService() {
+    public NetworkService() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         JSONPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JSONPlaceHolderApi.class);
+
+        Call<NetworkServiceResponse> call = jsonPlaceHolderApi.registerUser();
+
+        call.enqueue(new Callback<NetworkServiceResponse>() {
+            @Override
+            public void onResponse(Call<NetworkServiceResponse> call, Response<NetworkServiceResponse> response) {
+                System.out.println(response);
+            }
+
+            @Override
+            public void onFailure(Call<NetworkServiceResponse> call, Throwable t) {
+                System.out.println(t);
+                System.out.println("failuuuuuuuuuuuuuuuuure");
+            }
+        });
+
     }
 }

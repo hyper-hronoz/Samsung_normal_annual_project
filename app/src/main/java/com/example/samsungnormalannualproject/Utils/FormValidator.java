@@ -5,15 +5,15 @@ public class FormValidator {
     private String string;
 
     public FormValidator(String string) {
-        this.string = string;
+        this.string = string.trim();
     }
 
     public FormValidator(int number) {
-        this.string = String.valueOf(number);
+        this.string = String.valueOf(number).trim();
     }
 
     public FormValidator(float number) {
-        this.string = String.valueOf(number);
+        this.string = String.valueOf(number).trim();
     }
 
     public boolean setMinLength(int minLength) {

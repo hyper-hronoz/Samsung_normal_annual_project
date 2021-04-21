@@ -1,29 +1,27 @@
 package com.example.samsungnormalannualproject;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import retrofit2.Call;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.samsungnormalannualproject.API.JSONPlaceHolderApi;
-import com.example.samsungnormalannualproject.API.NetworkService;
 import com.example.samsungnormalannualproject.API.NetworkServiceResponse;
+import com.example.samsungnormalannualproject.Erors.UserErrors.ToastError;
 import com.example.samsungnormalannualproject.Models.User;
-import com.example.samsungnormalannualproject.Utils.FormValidator;
+import com.example.samsungnormalannualproject.Utils.InputDataValidator;
+import com.google.gson.GsonBuilder;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends BaseActivity {
 
@@ -58,9 +56,57 @@ public class LoginActivity extends BaseActivity {
     private void login() {
         this.login = this.loginEditText.getText().toString();
         this.password = this.passwordEditText.getText().toString();
+
+
+        InputDataValidator inputDataValidator = new InputDataValidator(this.login, this.password);
+
+        String response = inputDataValidator.validate();
+        if (response == "OK") {
+            User user = new User(this.login, this.password);
+
+            new Login(user, getApplicationContext());
+
+
+        } else {
+            new ToastError(getApplicationContext(), response);
+        }
     }
 
+    public class Login {
+        private String JWTToken;
+        User user;
+        public Login(User user, Context context) {
+            this.user = user;
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Config.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
 
+            JSONPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JSONPlaceHolderApi.class);
+
+            Call<NetworkServiceResponse> call = jsonPlaceHolderApi.loginUser(user);
+
+            call.enqueue(new Callback<NetworkServiceResponse>() {
+                @Override
+                public void onResponse(Call<NetworkServiceResponse> call, Response<NetworkServiceResponse> response) {
+                    String jwt = new GsonBuilder().setPrettyPrinting().create().toJson(response.body().getResponse()).replaceAll("^.|.$", "");
+                    System.out.println(jwt);
+                    SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.JWTTokenSharedPreferencesKey), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString(getString(R.string.JWTToken), jwt);
+                    editor.commit();
+
+                    Intent intent = new Intent(getApplicationContext(), ViewingNominationsActvity.class);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onFailure(Call<NetworkServiceResponse> call, Throwable t) {
+                    System.out.println("Failure");
+                }
+            });
+        }
+    }
 
 
 

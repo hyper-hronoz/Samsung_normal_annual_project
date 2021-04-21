@@ -2,21 +2,21 @@ package com.example.samsungnormalannualproject;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.samsungnormalannualproject.API.JSONPlaceHolderApi;
-import com.example.samsungnormalannualproject.API.NetworkService;
 import com.example.samsungnormalannualproject.API.NetworkServiceResponse;
 import com.example.samsungnormalannualproject.Erors.UserErrors.ToastError;
 import com.example.samsungnormalannualproject.Models.User;
-import com.example.samsungnormalannualproject.Utils.FormValidator;
+import com.example.samsungnormalannualproject.Utils.InputDataValidator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SignUpActivity extends BaseActivity {
 
@@ -75,14 +75,46 @@ public class SignUpActivity extends BaseActivity {
         });
     }
 
+    public class Register {
+        User user;
+        public Register(User user) {
+            this.user = user;
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Config.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            JSONPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JSONPlaceHolderApi.class);
+
+            Call<NetworkServiceResponse> call = jsonPlaceHolderApi.registerUser(user);
+
+            call.enqueue(new Callback<NetworkServiceResponse>() {
+                @Override
+                public void onResponse(Call<NetworkServiceResponse> call, Response<NetworkServiceResponse> response) {
+                    System.out.println(response);
+                }
+
+                @Override
+                public void onFailure(Call<NetworkServiceResponse> call, Throwable t) {
+                    System.out.println(t);
+                    System.out.println("failuuuuuuuuuuuuuuuuure");
+                }
+            });
+        }
+    }
+
     private void getEditTextData() {
         this.login = this.loginEditText.getText().toString();
         this.password = this.passwordEditText.getText().toString();
         this.password_2 = this.passwordAgainEditText.getText().toString();
 
         InputDataValidator inputDataValidator = new InputDataValidator(this.login, this.password, this.password_2);
-        if (inputDataValidator.validate()) {
+
+        String response = inputDataValidator.validate();
+        if (response == "OK") {
             postNewUser();
+        } else {
+            new ToastError(getApplicationContext(), response);
         }
 //        Intent intent = new Intent(this, SignUpForm.class);
 //        Bundle bundle = new Bundle();
@@ -92,45 +124,10 @@ public class SignUpActivity extends BaseActivity {
 
     }
 
-    private class InputDataValidator {
-        private String login;
-        private String password;
-        private String password_2;
-
-        private final int MINIMAL_LOGIN_LENGTH = 4;
-        private final int MINIMAL_PASSWORD_LENGTH = 8;
-
-        public InputDataValidator(String login, String password, String password_2) {
-            this.login = login;
-            this.password = password;
-            this.password_2 = password_2;
-        }
-
-        public boolean validate() {
-
-            if (this.password.equals(password_2)) {
-                if (new FormValidator(this.login).setMinLength(this.MINIMAL_LOGIN_LENGTH)) {
-
-                    if (new FormValidator(this.password).setMinLength(this.MINIMAL_PASSWORD_LENGTH))  {
-                        return true;
-                    } else {
-                        new ToastError(getApplicationContext(), "Password minimal length: " + this.MINIMAL_PASSWORD_LENGTH);
-                    }
-
-                } else {
-                    new ToastError(getApplicationContext(), "Login minimal length is: " + this.MINIMAL_LOGIN_LENGTH);
-                }
-            } else {
-                new ToastError(getApplicationContext(), "Password do not match");
-            }
-
-            return false;
-        }
-    }
 
     public void postNewUser(){
         User user = new User(this.login, this.password, "M");
-        new NetworkService(user);
+        new Register(user);
 
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);

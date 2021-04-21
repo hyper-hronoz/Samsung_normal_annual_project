@@ -11,6 +11,11 @@ public class User {
         this.gender = gender;
     }
 
+    public User(String login, String password) {
+        this.username = login;
+        this.password = password;
+    }
+
     public void setGender(String gender) {
         this.gender = gender;
     }

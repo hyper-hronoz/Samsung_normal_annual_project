@@ -77,7 +77,6 @@ public class SignUpForm extends BaseActivity  implements AdapterView.OnItemSelec
 
         setContentView(R.layout.acitibity_sign_up_fill_form);
 
-        this.isMen = getIntent().getExtras().getBoolean(SelectGenderActivity.GENDER);
         this.view = findViewById(R.id.sign_up_fill_form_view);
         this.button = findViewById(R.id.confirm_button);
 

@@ -27,13 +27,13 @@ public class MainActivity extends AppCompatActivity  {
         System.out.println("JWT is found " + JWTToken);
 
         if (JWTToken != "") {
-            Intent intent = new Intent(this, ViewingNominationsActvity.class);
+            Intent intent = new Intent(this, UserDataActivity.class);
             startActivity(intent);
         } else {
             Intent intent = new Intent(this, LoginOrSignUp.class);
             startActivity(intent);
         }
 
-        setContentView(R.layout.activity_main); // пусть отправляет запросы
+//        setContentView(R.layout.activity_main); // пусть отправляет запросы
     }
 }

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Samsung normal annual project</string>
     <string name="JWTToken">JWTToken</string>
+    <string name="genderMan">M</string>
+    <string name="genderWoman">W</string>
     <string name="JWTTokenSharedPreferencesKey">JWTToken</string>
 </resources>

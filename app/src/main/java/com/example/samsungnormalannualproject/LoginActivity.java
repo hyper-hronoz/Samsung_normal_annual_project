@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import retrofit2.Call;
 
+import android.service.autofill.UserData;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +33,26 @@ public class LoginActivity extends BaseActivity {
     private EditText passwordEditText;
     private Button button;
 
+    private String gender;
+    private View view;
+
+    private void setBackGround() {
+
+        System.out.println(this.gender);
+
+        try {
+            if (this.gender == getString(R.string.genderMan)) {
+                this.view.setBackgroundResource(R.drawable.select_gender_gradient_boy);
+            }
+            if (this.gender == getString(R.string.genderWoman)) {
+                this.view.setBackgroundResource(R.drawable.select_gender_gradient_girl);
+            }
+        } catch (Exception e) {
+            return;
+        }
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +60,14 @@ public class LoginActivity extends BaseActivity {
 
         System.out.println(this.loginEditText);
 
+        this.view = (View) findViewById(R.id.login_view);
         this.loginEditText = findViewById(R.id.login_login);
         this.passwordEditText = findViewById(R.id.login_password);
         this.button = findViewById(R.id.login_confirm);
+
+        this.gender = SelectGenderActivity.gender;
+
+        setBackGround();
 
         BaseActivity.activityHeading = findViewById(R.id.activity_heading);
 
@@ -78,7 +104,7 @@ public class LoginActivity extends BaseActivity {
         public Login(User user, Context context) {
             this.user = user;
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Config.BASE_URL)
+                    .baseUrl(NetworkConfig.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
@@ -89,14 +115,13 @@ public class LoginActivity extends BaseActivity {
             call.enqueue(new Callback<NetworkServiceResponse>() {
                 @Override
                 public void onResponse(Call<NetworkServiceResponse> call, Response<NetworkServiceResponse> response) {
+                    System.out.println("Network service response is: " + new GsonBuilder().setPrettyPrinting().create().toJson(response));
                     String jwt = new GsonBuilder().setPrettyPrinting().create().toJson(response.body().getResponse()).replaceAll("^.|.$", "");
-                    System.out.println(jwt);
                     SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.JWTTokenSharedPreferencesKey), Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString(getString(R.string.JWTToken), jwt);
                     editor.commit();
-
-                    Intent intent = new Intent(getApplicationContext(), ViewingNominationsActvity.class);
+                    Intent intent = new Intent(getApplicationContext(), UserDataActivity.class);
                     startActivity(intent);
                 }
 

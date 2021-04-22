@@ -20,44 +20,32 @@ public class SelectGenderActivity extends BaseActivity {
     private ImageButton selectMenButton;
     private Button confirmGenderButton;
 
-    // ключи
-    private static final String PREFS = "PREFS";
-    public static final String GENDER = "GENDER";
-
-    private final String WOMEN_SELECTOR_KEY = "isClickedWomen";
-    private final String MEN_SELECTOR_KEY = "isClickedMen";
-
-
-    private boolean isMen = true;
+    public static String gender;
 
     private static View view;
 
     // здесь меняется выбранный элемент
     private void changeGenderSelection() {
-        System.out.println(this.isMen);
-        if (isMen) {
+        System.out.println(this.gender);
+        if (this.gender == getString(R.string.genderMan)) {
             selectMenButton.setBackgroundResource(R.drawable.gender_selecion_button);
             selectWomenButton.setBackgroundColor(Color.TRANSPARENT);
             this.view.setBackgroundResource(R.drawable.select_gender_gradient_boy);
         }
 
-        if (!isMen){
+        else if (this.gender == getString(R.string.genderWoman)){
             selectWomenButton.setBackgroundResource(R.drawable.gender_selecion_button);
             selectMenButton.setBackgroundColor(Color.TRANSPARENT);
             this.view.setBackgroundResource(R.drawable.select_gender_gradient_girl);
         }
     }
 
-    private void changeGender() {
-        this.isMen = !isMen;
+    private void changeGender(String g) {
+        this.gender =  g;
     }
 
     private void startSignUpActivity() {
         Intent intent = new Intent(this, SignUpActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean(this.GENDER, this.isMen);
-        intent.putExtras(bundle);
-        System.out.println("Don't fuck " + this.isMen);
         startActivity(intent);
     }
 
@@ -74,6 +62,10 @@ public class SelectGenderActivity extends BaseActivity {
         this.view = (View) findViewById(R.id.view);
         this.confirmGenderButton = (Button) findViewById(R.id.button);
 
+        // устанавливаем дефолтный пол
+        this.gender = getString(R.string.genderMan);
+
+        // нажатие на кнопку подтвердить выбор
         this.confirmGenderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +77,7 @@ public class SelectGenderActivity extends BaseActivity {
         this.selectMenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeGender();
+                changeGender(getString(R.string.genderMan));
                 changeGenderSelection();
             }
         });
@@ -94,7 +86,7 @@ public class SelectGenderActivity extends BaseActivity {
         this.selectWomenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeGender();
+                changeGender(getString(R.string.genderWoman));
                 changeGenderSelection();
             }
         });

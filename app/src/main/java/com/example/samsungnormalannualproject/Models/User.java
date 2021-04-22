@@ -1,19 +1,32 @@
 package com.example.samsungnormalannualproject.Models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class User {
+    @SerializedName("username")
     public String username;
+    @SerializedName("password")
     public String password;
+    @SerializedName("gender")
     public String gender;
 
-    public User(String login, String password, String gender) {
-        this.username = login;
+    public User(String username, String password, String gender) {
+        this.username = username;
         this.password = password;
         this.gender = gender;
     }
 
-    public User(String login, String password) {
-        this.username = login;
+    public User(String username, String password) {
+        this.username = username;
         this.password = password;
+    }
+
+    public User(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public void setGender(String gender) {

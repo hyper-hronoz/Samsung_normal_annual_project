@@ -32,17 +32,23 @@ public class SignUpActivity extends BaseActivity {
     private String password;
     private String password_2;
 
+    private String gender;
+
     private void setBackGround() {
 
-        System.out.println(this.view);
+        System.out.println(this.gender);
 
-        if (this.isMen) {
-            this.view.setBackgroundResource(R.drawable.select_gender_gradient_boy);
+        try {
+            if (this.gender == getString(R.string.genderMan)) {
+                this.view.setBackgroundResource(R.drawable.select_gender_gradient_boy);
+            }
+            if (this.gender == getString(R.string.genderWoman)) {
+                this.view.setBackgroundResource(R.drawable.select_gender_gradient_girl);
+            }
+        } catch (Exception e) {
+            return;
         }
 
-        if (!this.isMen) {
-            this.view.setBackgroundResource(R.drawable.select_gender_gradient_girl);
-        }
     }
 
 
@@ -52,6 +58,7 @@ public class SignUpActivity extends BaseActivity {
 
         setContentView(R.layout.activity_sign_up);
 
+        this.gender = SelectGenderActivity.gender;
 
         // ну здесь мы присваем значения для полей
         this.view = (View) findViewById(R.id.sign_up_view);
@@ -60,7 +67,6 @@ public class SignUpActivity extends BaseActivity {
         this.passwordEditText = (EditText) findViewById(R.id.login_password);
         this.passwordAgainEditText = (EditText) findViewById(R.id.editText_password_again);
 
-        this.isMen = getIntent().getExtras().getBoolean(SelectGenderActivity.GENDER);
         setBackGround();
 
         BaseActivity.activityHeading = findViewById(R.id.activity_heading);
@@ -80,7 +86,7 @@ public class SignUpActivity extends BaseActivity {
         public Register(User user) {
             this.user = user;
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Config.BASE_URL)
+                    .baseUrl(NetworkConfig.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 

@@ -4,7 +4,8 @@
     <string name="genderMan">M</string>
     <string name="genderWoman">W</string>
     <string name="JWTTokenSharedPreferencesKey">JWTToken</string>
-    <string name="userSharedPreferencesKey"></string>
+    <string name="userSharedPreferencesKey">userKey</string>
+    <string name="userData">userData</string>
     <string name="userName">username</string>
     <string name="userInfo">userInfo</string>
 </resources>

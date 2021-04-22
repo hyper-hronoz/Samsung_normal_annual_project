@@ -21,7 +21,6 @@ public class MainActivity extends BaseActivity  {
         super.onCreate(savedInstanceState);
 
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.JWTTokenSharedPreferencesKey), Context.MODE_PRIVATE);
-        System.out.println(getString(R.string.JWTToken));
         String JWTToken = sharedPref.getString(getString(R.string.JWTToken), "");
 
         System.out.println("JWT is found " + JWTToken);
@@ -35,6 +34,5 @@ public class MainActivity extends BaseActivity  {
         startActivity(intent);
 
         finish();
-//        setContentView(R.layout.activity_main); // пусть отправляет запросы
     }
 }

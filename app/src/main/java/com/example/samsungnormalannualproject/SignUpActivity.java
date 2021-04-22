@@ -48,9 +48,7 @@ public class SignUpActivity extends BaseActivity {
         } catch (Exception e) {
             return;
         }
-
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +81,7 @@ public class SignUpActivity extends BaseActivity {
 
     public class Register {
         User user;
+
         public Register(User user) {
             this.user = user;
             Retrofit retrofit = new Retrofit.Builder()
@@ -124,13 +123,11 @@ public class SignUpActivity extends BaseActivity {
         }
     }
 
-
-    public void postNewUser(){
+    public void postNewUser() {
         User user = new User(this.login, this.password, SelectGenderActivity.gender);
         new Register(user);
 
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
-
     }
 }

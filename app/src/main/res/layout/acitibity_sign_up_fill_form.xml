@@ -49,16 +49,18 @@
                         android:text="Select your gender" />
 
                     <RadioGroup
+                        android:id="@+id/select_gender_radio_group"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <RadioButton
-                            android:id="@+id/hello_world"
+                            android:id="@+id/radio_man"
                             style="@style/radio"
                             android:text="man" />
 
                         <RadioButton
+                            android:id="@+id/radio_woman"
                             style="@style/radio"
                             android:text="woman" />
                     </RadioGroup>

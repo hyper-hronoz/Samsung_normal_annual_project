@@ -2,13 +2,11 @@ package com.example.samsungnormalannualproject.Models;
 
 import java.util.Map;
 
-public class RegisteredUser  {
-    public String username;
-
+public class RegisteredUser extends User  {
     public Map<String, String> userInfo;
 
     public RegisteredUser(String username, Map<String, String> userInfo) {
-        this.username = username;
+        super(username);
         this.userInfo = userInfo;
     }
 

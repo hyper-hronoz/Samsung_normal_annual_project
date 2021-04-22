@@ -15,6 +15,7 @@ import com.example.samsungnormalannualproject.Models.User;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.util.Map;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -49,8 +50,22 @@ public class UserDataActivity extends AppCompatActivity {
         call.enqueue(new Callback<RegisteredUser>() {
             @Override
             public void onResponse(Call<RegisteredUser> call, Response<RegisteredUser> response) {
+                SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.userSharedPreferencesKey), Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString(getString(R.string.userName), new GsonBuilder().setPrettyPrinting().create().toJson(response.body().getUsername()));
+                editor.putString(getString(R.string.userInfo), new GsonBuilder().setPrettyPrinting().create().toJson(response.body().getUserInfo()));
+                Map<String, String> userInfo = response.body().getUserInfo();
+                Log.d("userInfo", String.valueOf(response.body().getUserInfo().size()));
+                if (userInfo.size() == 1) {
+                    Intent intent = new Intent(getApplicationContext(), SignUpForm.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), ViewingNominationsActvity.class);
+                    startActivity(intent);
+                }
+                editor.commit();
                 Log.d("Call", "onResponse: " + call);
-                Log.d("GetUserDataResponse", "onResponse: " + new GsonBuilder().setPrettyPrinting().create().toJson(response));
+                Log.d("GetUserDataResponse", "onResponse: " + new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
             }
 
             @Override

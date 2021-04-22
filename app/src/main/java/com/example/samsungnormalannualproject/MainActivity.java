@@ -13,7 +13,7 @@ import android.view.WindowManager;
 
 import com.example.samsungnormalannualproject.interfaces.ActivitySettings;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends BaseActivity  {
     private final boolean isAuth = false;
 
     @Override
@@ -26,14 +26,15 @@ public class MainActivity extends AppCompatActivity  {
 
         System.out.println("JWT is found " + JWTToken);
 
+        Intent intent;
         if (JWTToken != "") {
-            Intent intent = new Intent(this, UserDataActivity.class);
-            startActivity(intent);
+            intent = new Intent(this, UserDataActivity.class);
         } else {
-            Intent intent = new Intent(this, LoginOrSignUp.class);
-            startActivity(intent);
+            intent = new Intent(this, LoginOrSignUp.class);
         }
+        startActivity(intent);
 
+        finish();
 //        setContentView(R.layout.activity_main); // пусть отправляет запросы
     }
 }

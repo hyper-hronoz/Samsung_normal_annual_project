@@ -26,12 +26,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class UserDataActivity extends AppCompatActivity {
+public class UserDataActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.JWTTokenSharedPreferencesKey), Context.MODE_PRIVATE);
         System.out.println(getString(R.string.JWTToken));
@@ -66,6 +65,7 @@ public class UserDataActivity extends AppCompatActivity {
                 editor.commit();
                 Log.d("Call", "onResponse: " + call);
                 Log.d("GetUserDataResponse", "onResponse: " + new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                finish();
             }
 
             @Override
@@ -73,5 +73,6 @@ public class UserDataActivity extends AppCompatActivity {
                 System.out.println(t);
             }
         });
+
     }
 }

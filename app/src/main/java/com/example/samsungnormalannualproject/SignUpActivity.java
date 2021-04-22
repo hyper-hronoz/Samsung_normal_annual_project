@@ -122,56 +122,15 @@ public class SignUpActivity extends BaseActivity {
         } else {
             new ToastError(getApplicationContext(), response);
         }
-//        Intent intent = new Intent(this, SignUpForm.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putBoolean(SelectGenderActivity.GENDER, this.isMen);
-//        intent.putExtras(bundle);
-//        startActivity(intent);
-
     }
 
 
     public void postNewUser(){
-        User user = new User(this.login, this.password, "M");
+        User user = new User(this.login, this.password, SelectGenderActivity.gender);
         new Register(user);
 
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
 
-//        String url = "http://192.168.0.15:3000/auth/registration";
-//        StringRequest stringRequest = new StringRequest(
-//                Request.Method.POST,
-//                url,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Toast.makeText(getApplicationContext(),response.trim(),Toast.LENGTH_LONG).show();
-//
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
-//                    }
-//                })
-//        {
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String,String> params = new HashMap<String, String>();
-//                params.put("username", nickName);
-//                params.put("password", password);
-//                return params;
-//            }
-//
-////            @Override
-////            public Map<String, String> getHeaders() {
-////                HashMap<String, String> params = new HashMap<String, String>();
-////                params.put("Content-Type", "application/json");
-////                return params;
-////            }
-//        };
-//        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-//        requestQueue.add(stringRequest);
     }
 }

@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SamsungNormalAnnualProject"
         android:usesCleartextTraffic="true">
+        android:theme="@android:style/Theme.NoDisplay"
         <activity android:name=".UserDataActivity"></activity>
         <activity android:name=".ViewingNominationsActvity" />
         <activity android:name=".WhatKindOfPeopleLookinFor" />

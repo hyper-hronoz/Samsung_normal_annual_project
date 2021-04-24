@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/findUserView"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:padding="16dp"
@@ -55,7 +56,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/profilePhoto"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/firstInfo"
@@ -66,10 +67,10 @@
         tools:ignore="VectorDrawableCompat" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/about"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
+        android:layout_below="@+id/profilePhoto"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:text="В мире есть около 20 миллионов более интересных занятий, чем удаление фона вручную. Благодаря умному ИИ сайта remove.bg вы можете сократить время на редактирование и получить больше удовольствия!"
@@ -79,7 +80,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView8"
+        android:layout_below="@+id/about"
         android:layout_marginTop="20dp">
 
         <ImageButton

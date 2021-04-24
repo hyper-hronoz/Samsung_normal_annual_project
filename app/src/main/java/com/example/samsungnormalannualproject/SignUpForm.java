@@ -71,10 +71,13 @@ public class SignUpForm extends BaseActivity {
     private EditText hairColorEditText;
     private EditText userHeightEditText;
     private EditText userAboutEditText;
+    private EditText userAgeEditText;
 
     private Uri imageURi;
 
     private Bitmap bitmap;
+
+
 
 
     private RequestBody imageToUpload;
@@ -117,6 +120,7 @@ public class SignUpForm extends BaseActivity {
         this.hairColorEditText = findViewById(R.id.hairs_color);
         this.userHeightEditText = findViewById(R.id.height);
         this.userAboutEditText = findViewById(R.id.aboutUser);
+        this.userAgeEditText = findViewById(R.id.age);
 
 
 
@@ -194,6 +198,7 @@ public class SignUpForm extends BaseActivity {
         registeredUserInfo.put("hairsColor", this.hairColorEditText.getText().toString());
         registeredUserInfo.put("height", this.userHeightEditText.getText().toString());
         registeredUserInfo.put("aboutUser", this.userAboutEditText.getText().toString());
+        registeredUserInfo.put("age", this.userAgeEditText.getText().toString());
 
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.userSharedPreferencesKey), Context.MODE_PRIVATE);
         String user = sharedPref.getString(getString(R.string.userData), "");

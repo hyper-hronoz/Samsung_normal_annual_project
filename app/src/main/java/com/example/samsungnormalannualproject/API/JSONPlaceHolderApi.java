@@ -35,4 +35,7 @@ public interface JSONPlaceHolderApi {
 
     @POST("/auth/upload")
     Call<UploadImage> postImage(@Header("Authorization") String token, @Body UploadImage uploadImage);
+
+    @GET("/find/user")
+    Call<RegisteredUser> findUser(@Header("Authorization") String token);
 }

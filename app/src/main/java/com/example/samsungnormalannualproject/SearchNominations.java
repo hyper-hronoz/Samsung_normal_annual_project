@@ -1,12 +1,32 @@
 package com.example.samsungnormalannualproject;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.example.samsungnormalannualproject.API.JSONPlaceHolderApi;
+import com.example.samsungnormalannualproject.Models.RegisteredUser;
+import com.example.samsungnormalannualproject.Models.UploadImage;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +43,13 @@ public class SearchNominations extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private View view;
+
+    private TextView nominationAgeTextView;
+    private ImageView profilePhotoImageView;
+    private TextView aboutTextView;
+    private TextView nominationHeadingTextView;
 
     public SearchNominations() {
         // Required empty public constructor
@@ -53,12 +80,91 @@ public class SearchNominations extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        this.view = getView();
+
+
+
+
+
+        getRandomUser();
+    }
+
+
+    private void getRandomUser() {
+        SharedPreferences sharedPref = getContext().getSharedPreferences(getString(R.string.JWTTokenSharedPreferencesKey), Context.MODE_PRIVATE);
+        String JWTToken = sharedPref.getString(getString(R.string.JWTToken), "");
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(NetworkConfig.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        JSONPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JSONPlaceHolderApi.class);
+
+        Log.d("JWT is" , JWTToken);
+
+        Call<RegisteredUser> call = jsonPlaceHolderApi.findUser("Bearer " + JWTToken);
+
+        call.enqueue(new Callback<RegisteredUser>() {
+            @Override
+            public void onResponse(Call<RegisteredUser> call, Response<RegisteredUser> response) {
+                Log.d("Login status code is", String.valueOf(response.code()));
+                Log.d("Login response body is", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                if (response.code() == 401) {
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    setFindUser(response);
+                }
+            }
+            @Override
+            public void onFailure(Call<RegisteredUser> call, Throwable t) {
+                Log.e("Search nominat error", t.getMessage());
+            }
+        });
+
+    }
+
+    private void setFindUser(Response<RegisteredUser> response) {
+        this.nominationHeadingTextView.setText(response.body().getUsername());
+        this.nominationAgeTextView.setText(response.body().getUserInfo().get("age") == null ? "" : "age " + response.body().getUserInfo().get("age"));
+        this.aboutTextView.setText(response.body().userInfo.get("aboutUser"));
+        Glide.with(getContext()).load(response.body().getUserPhoto()).into(this.profilePhotoImageView);
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_nominations, container, false);
+        View v = inflater.inflate(R.layout.fragment_search_nominations, container, false);
+
+        this.aboutTextView = v.findViewById(R.id.about);
+        this.nominationAgeTextView = v.findViewById(R.id.nomination_age);
+        this.nominationHeadingTextView = v.findViewById(R.id.nomination_heading);
+        this.profilePhotoImageView = v.findViewById(R.id.profilePhoto);
+
+        v.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
+            public void onSwipeTop() {
+                Toast.makeText(getActivity(), "TOP SWIPE", Toast.LENGTH_SHORT).show();
+            }
+
+            public void onSwipeRight() {
+                Toast.makeText(getActivity(), "RIGHT SWIPE", Toast.LENGTH_SHORT).show();
+                //go back to landing page
+                // Intent intent = new Intent (getApplicationContext(), MainScreen.class);
+                // startActivity (intent);
+            }
+
+            public void onSwipeLeft() {
+                getRandomUser();
+            }
+
+            public void onSwipeBottom() {
+                Toast.makeText(getActivity(), "BOTTOM SWIPE", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return v;
     }
 }

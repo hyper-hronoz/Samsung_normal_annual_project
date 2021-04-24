@@ -1,5 +1,7 @@
 package com.example.samsungnormalannualproject.Models;
 
+import com.example.samsungnormalannualproject.SignUpActivity;
+
 import java.util.Map;
 
 public class RegisteredUser extends User  {
@@ -8,6 +10,10 @@ public class RegisteredUser extends User  {
     public RegisteredUser(String username, Map<String, String> userInfo) {
         super(username);
         this.userInfo = userInfo;
+    }
+
+    public RegisteredUser(String username) {
+        super(username);
     }
 
     public Map<String, String> getUserInfo() {

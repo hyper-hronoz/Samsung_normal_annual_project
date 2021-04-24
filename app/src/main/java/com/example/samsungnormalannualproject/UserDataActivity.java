@@ -49,22 +49,28 @@ public class UserDataActivity extends BaseActivity {
         call.enqueue(new Callback<RegisteredUser>() {
             @Override
             public void onResponse(Call<RegisteredUser> call, Response<RegisteredUser> response) {
-                SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.userSharedPreferencesKey), Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString(getString(R.string.userData), new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
-                HashMapPreferences.saveMap(getApplicationContext(), getString(R.string.userInfo), response.body().getUserInfo());
-                Map<String, String> userInfo = response.body().getUserInfo();
-                Log.d("userInfo", String.valueOf(response.body().getUserInfo().size()));
-                if (userInfo.size() == 1) {
-                    Intent intent = new Intent(getApplicationContext(), SignUpForm.class);
+                System.out.println("Status code is: " + response.code());
+                if (response.code() == 401) {
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                 } else {
-                    Intent intent = new Intent(getApplicationContext(), ViewingNominationsActvity.class);
-                    startActivity(intent);
+                    SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.userSharedPreferencesKey), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString(getString(R.string.userData), new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                    HashMapPreferences.saveMap(getApplicationContext(), getString(R.string.userInfo), response.body().getUserInfo());
+                    Map<String, String> userInfo = response.body().getUserInfo();
+                    Log.d("userInfo", String.valueOf(response.body().getUserInfo().size()));
+                    if (userInfo.size() == 1) {
+                        Intent intent = new Intent(getApplicationContext(), SignUpForm.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), BottomMenu.class);
+                        startActivity(intent);
+                    }
+                    editor.commit();
+                    Log.d("Call", "onResponse: " + call);
+                    Log.d("GetUserDataResponse", "onResponse: " + new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
                 }
-                editor.commit();
-                Log.d("Call", "onResponse: " + call);
-                Log.d("GetUserDataResponse", "onResponse: " + new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
                 finish();
             }
 

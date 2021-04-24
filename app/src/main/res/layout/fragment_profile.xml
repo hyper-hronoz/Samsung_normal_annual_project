@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:padding="16dp"
+    android:layout_height="fill_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/firstInfo"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/nomination_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="Elena Elaza"
+                    android:textColor="@color/black"
+                    android:textSize="33dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:gravity="right">
+
+                <TextView
+                    android:id="@+id/nomination_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:paddingBottom="4dp"
+                    android:text="age 24"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/white"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_settings_24" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/firstInfo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/image_profile"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="В мире есть около 20 миллионов более интересных занятий, чем удаление фона вручную. Благодаря умному ИИ сайта remove.bg вы можете сократить время на редактирование и получить больше удовольствия!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+</RelativeLayout>

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import retrofit2.Call;
 
 import android.service.autofill.UserData;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -99,10 +100,10 @@ public class LoginActivity extends BaseActivity {
     }
 
     public class Login {
-        private String JWTToken;
         User user;
         public Login(User user, Context context) {
             this.user = user;
+            System.out.println("Что отправляем: " + new GsonBuilder().setPrettyPrinting().create().toJson(user));
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(NetworkConfig.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
@@ -110,19 +111,25 @@ public class LoginActivity extends BaseActivity {
 
             JSONPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JSONPlaceHolderApi.class);
 
-            Call<NetworkServiceResponse> call = jsonPlaceHolderApi.loginUser(user);
+            Call<NetworkServiceResponse> call = jsonPlaceHolderApi.loginUser(this.user);
 
             call.enqueue(new Callback<NetworkServiceResponse>() {
                 @Override
                 public void onResponse(Call<NetworkServiceResponse> call, Response<NetworkServiceResponse> response) {
-                    System.out.println("Network service response is: " + new GsonBuilder().setPrettyPrinting().create().toJson(response));
-                    String jwt = new GsonBuilder().setPrettyPrinting().create().toJson(response.body().getResponse()).replaceAll("^.|.$", "");
-                    SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.JWTTokenSharedPreferencesKey), Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString(getString(R.string.JWTToken), jwt);
-                    editor.commit();
-                    Intent intent = new Intent(getApplicationContext(), UserDataActivity.class);
-                    startActivity(intent);
+                    Log.d("Login status code is", String.valueOf(response.code()));
+                    Log.d("Login response body is", String.valueOf(response.body()));
+                    if (response.code() == 400) {
+                        new ToastError(getApplicationContext(), "incorrect login or password");
+                    } else {
+                        String jwt = new GsonBuilder().setPrettyPrinting().create().toJson(response.body().getResponse()).replaceAll("^.|.$", "");
+                        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.JWTTokenSharedPreferencesKey), Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        Log.d("JWT toke from login", jwt);
+                        editor.putString(getString(R.string.JWTToken), jwt);
+                        editor.commit();
+                        Intent intent = new Intent(getApplicationContext(), UserDataActivity.class);
+                        startActivity(intent);
+                    }
                 }
 
                 @Override
@@ -132,33 +139,4 @@ public class LoginActivity extends BaseActivity {
             });
         }
     }
-
-
-
-//        StringRequest stringRequest = new StringRequest(
-//                Request.Method.POST,
-//                url,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Toast.makeText(getApplicationContext(),response.trim(),Toast.LENGTH_LONG).show();
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
-//                    }
-//                })
-//        {
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String,String> params = new HashMap<String, String>();
-//                params.put("username", login);
-//                params.put("password", password);
-//                return params;
-//            }
-//        };
-//        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-//        requestQueue.add(stringRequest);
 }

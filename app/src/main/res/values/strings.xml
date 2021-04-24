@@ -8,4 +8,18 @@
     <string name="userData">userData</string>
     <string name="userName">username</string>
     <string name="userInfo">userInfo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string-array name="messages_persons">
+        <item>Cat</item>
+        <item>Dog</item>
+        <item>Elephant</item>
+        <item>Hydra</item>
+    </string-array>
+
+    <string-array name="messages">
+        <item>random message</item>
+    </string-array>
 </resources>

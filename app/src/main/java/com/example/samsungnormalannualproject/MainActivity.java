@@ -11,7 +11,16 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.samsungnormalannualproject.API.JSONPlaceHolderApi;
+import com.example.samsungnormalannualproject.API.NetworkServiceResponse;
 import com.example.samsungnormalannualproject.interfaces.ActivitySettings;
+import com.google.gson.GsonBuilder;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends BaseActivity  {
     private final boolean isAuth = false;
@@ -24,6 +33,8 @@ public class MainActivity extends BaseActivity  {
         String JWTToken = sharedPref.getString(getString(R.string.JWTToken), "");
 
         System.out.println("JWT is found " + JWTToken);
+
+
 
         Intent intent;
         if (JWTToken != "") {

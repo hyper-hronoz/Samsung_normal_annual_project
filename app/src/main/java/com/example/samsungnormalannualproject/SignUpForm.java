@@ -1,18 +1,27 @@
 package com.example.samsungnormalannualproject;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+
+import androidx.annotation.Nullable;
 
 import com.example.samsungnormalannualproject.API.JSONPlaceHolderApi;
 import com.example.samsungnormalannualproject.Erors.UserErrors.ToastError;
@@ -21,16 +30,26 @@ import com.example.samsungnormalannualproject.Utils.HashMapPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SignUpForm extends BaseActivity implements AdapterView.OnItemSelectedListener {
+public class SignUpForm extends BaseActivity {
     private boolean isMen = false;
 
     private View view;
@@ -53,6 +72,13 @@ public class SignUpForm extends BaseActivity implements AdapterView.OnItemSelect
     private EditText userHeightEditText;
     private EditText userAboutEditText;
 
+    private Uri imageURi;
+
+    private Bitmap bitmap;
+
+
+    private RequestBody imageToUpload;
+
     // устанавливает фон для элементов в зависимости от выбранного пола
     private void setBackGround() {
 
@@ -68,36 +94,13 @@ public class SignUpForm extends BaseActivity implements AdapterView.OnItemSelect
     }
 
     private void spinner() {
-        this.eyes_color_spinner = (Spinner) findViewById(R.id.eyes_color_spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, paths);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.eyes_color_spinner.setAdapter(adapter);
-        this.eyes_color_spinner.setOnItemSelectedListener(this);
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-
-        switch (position) {
-            case 0:
-                // Whatever you want to happen when the first item gets selected
-                break;
-            case 1:
-                // Whatever you want to happen when the second item gets selected
-                break;
-            case 2:
-                // Whatever you want to happen when the thrid item gets selected
-                break;
-
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        return;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +117,8 @@ public class SignUpForm extends BaseActivity implements AdapterView.OnItemSelect
         this.hairColorEditText = findViewById(R.id.hairs_color);
         this.userHeightEditText = findViewById(R.id.height);
         this.userAboutEditText = findViewById(R.id.aboutUser);
+
+
 
 //        spinner();
 
@@ -138,6 +143,7 @@ public class SignUpForm extends BaseActivity implements AdapterView.OnItemSelect
         this.genderRadioGroup = findViewById(R.id.select_gender_radio_group);
         this.manRadioButton = findViewById(R.id.radio_man);
         this.womanRadioButton = findViewById(R.id.radio_woman);
+
 //
         this.manRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,6 +152,8 @@ public class SignUpForm extends BaseActivity implements AdapterView.OnItemSelect
                 changeGenderRadioButton();
             }
         });
+
+
 
         this.womanRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,6 +169,22 @@ public class SignUpForm extends BaseActivity implements AdapterView.OnItemSelect
 //        RadioButton simpleRadioButton=(RadioButton) findViewById(R.id.hello_world);
 //        simpleRadioButton.setText("I am a radiobutton"); // displayed text of radio button
     }
+
+
+    private void hz() {
+        File file = new File(imageURi.getPath());
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+// MultipartBody.Part is used to send also the actual file name
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+
+// add another part within the multipart request
+         this.imageToUpload =
+                RequestBody.create(MediaType.parse("multipart/form-data"), UUID.randomUUID().toString().replace("-", ""));
+    }
+
 
     private void updateUserData() {
         Map<String, String> registeredUserInfo = new HashMap<String, String>();

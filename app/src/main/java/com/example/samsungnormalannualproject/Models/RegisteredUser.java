@@ -6,10 +6,25 @@ import java.util.Map;
 
 public class RegisteredUser extends User  {
     public Map<String, String> userInfo;
+    public String userPhoto;
 
     public RegisteredUser(String username, Map<String, String> userInfo) {
         super(username);
         this.userInfo = userInfo;
+    }
+
+    public void setUserPhoto(String userPhoto) {
+        this.userPhoto = userPhoto;
+    }
+
+    public String getUserPhoto() {
+        return userPhoto;
+    }
+
+    public RegisteredUser(String username, Map<String, String> userInfo, String userPhoto) {
+        super(username);
+        this.userInfo = userInfo;
+        this.userPhoto = userPhoto;
     }
 
     public RegisteredUser(String username) {

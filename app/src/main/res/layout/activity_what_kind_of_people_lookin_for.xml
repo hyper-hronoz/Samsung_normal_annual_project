@@ -8,243 +8,243 @@
     tools:context=".WhatKindOfPeopleLookinFor">
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="294dp"
-        tools:layout_editor_absoluteY="243dp">
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        tools:layout_editor_absoluteX="294dp"-->
+<!--        tools:layout_editor_absoluteY="243dp">-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical">-->
 
-            <TextView
-                android:id="@+id/activity_heading"
-                style="@style/activity_heading"
-                android:text="What kind of people \nyou are looking for" />
-
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="80"
-                android:background="@drawable/login_registrate_background"
-                android:orientation="vertical"
-                android:padding="50dp">
+<!--            <TextView-->
+<!--                android:id="@+id/activity_heading"-->
+<!--                style="@style/activity_heading"-->
+<!--                android:text="What kind of people \nyou are looking for" />-->
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/input_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:text="Select your gender" />
-
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/hello_world"
-                            style="@style/radio"
-                            android:text="man" />
-
-                        <RadioButton
-                            style="@style/radio"
-                            android:text="woman" />
-                    </RadioGroup>
-                </LinearLayout>
+<!--            <LinearLayout-->
+<!--                android:layout_width="fill_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="80"-->
+<!--                android:background="@drawable/login_registrate_background"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="50dp">-->
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="40dp"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        style="@style/input_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:text="Color of eyes" />
+<!--                    <TextView-->
+<!--                        style="@style/input_label"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:text="Select your gender" />-->
 
-                    <RadioButton
-                        style="@style/radio"
-                        android:text="no matter" />
+<!--                    <RadioGroup-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="horizontal">-->
 
-                    <Spinner
-                        android:id="@+id/eyes_color_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@drawable/spinner" />
-                </LinearLayout>
+<!--                        <RadioButton-->
+<!--                            android:id="@+id/hello_world"-->
+<!--                            style="@style/radio"-->
+<!--                            android:text="man" />-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/input_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:text="Color of eyes" />
-
-                    <RadioButton
-                        style="@style/radio"
-                        android:text="no matter" />
-
-                    <Spinner
-                        android:id="@+id/eyes_color_spinner2"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@drawable/spinner" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/input_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:text="Color of eyes" />
-
-                    <RadioButton
-                        style="@style/radio"
-                        android:text="no matter" />
-
-                    <Spinner
-                        android:id="@+id/eyes_color_spinner1"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@drawable/spinner" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/input_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:text="Color of eyes" />
-
-                    <RadioButton
-                        style="@style/radio"
-                        android:text="no matter" />
-
-                    <Spinner
-                        android:id="@+id/eyes_color_spinner7"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@drawable/spinner" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/input_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:text="Color of eyes" />
-
-                    <RadioButton
-                        style="@style/radio"
-                        android:text="no matter" />
-
-                    <Spinner
-                        android:id="@+id/eyes_color_spinner5"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@drawable/spinner" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/input_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:text="Color of eyes" />
-
-                    <RadioButton
-                        style="@style/radio"
-                        android:text="no matter" />
-
-                    <Spinner
-                        android:id="@+id/eyes_color_spinner4"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@drawable/spinner" />
-                </LinearLayout>
+<!--                        <RadioButton-->
+<!--                            style="@style/radio"-->
+<!--                            android:text="woman" />-->
+<!--                    </RadioGroup>-->
+<!--                </LinearLayout>-->
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="40dp"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        style="@style/input_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:text="Add something you wanna find" />
+<!--                    <TextView-->
+<!--                        style="@style/input_label"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:text="Color of eyes" />-->
 
-                    <EditText
-                        android:id="@+id/editTextTextMultiLine"
-                        android:layout_width="match_parent"
-                        android:layout_height="195dp"
-                        android:background="@drawable/spinner"
-                        android:ems="10"
-                        android:gravity="start|top"
-                        android:inputType="textMultiLine"
-                        android:padding="5dp" />
-                </LinearLayout>
+<!--                    <RadioButton-->
+<!--                        style="@style/radio"-->
+<!--                        android:text="no matter" />-->
+
+<!--                    <Spinner-->
+<!--                        android:id="@+id/eyes_color_spinner"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/fillFormEditText" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="40dp"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <TextView-->
+<!--                        style="@style/input_label"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:text="Color of eyes" />-->
+
+<!--                    <RadioButton-->
+<!--                        style="@style/radio"-->
+<!--                        android:text="no matter" />-->
+
+<!--                    <Spinner-->
+<!--                        android:id="@+id/eyes_color_spinner2"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/fillFormEditText" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="40dp"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <TextView-->
+<!--                        style="@style/input_label"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:text="Color of eyes" />-->
+
+<!--                    <RadioButton-->
+<!--                        style="@style/radio"-->
+<!--                        android:text="no matter" />-->
+
+<!--                    <Spinner-->
+<!--                        android:id="@+id/eyes_color_spinner1"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/fillFormEditText" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="40dp"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <TextView-->
+<!--                        style="@style/input_label"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:text="Color of eyes" />-->
+
+<!--                    <RadioButton-->
+<!--                        style="@style/radio"-->
+<!--                        android:text="no matter" />-->
+
+<!--                    <Spinner-->
+<!--                        android:id="@+id/eyes_color_spinner7"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/fillFormEditText" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="40dp"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <TextView-->
+<!--                        style="@style/input_label"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:text="Color of eyes" />-->
+
+<!--                    <RadioButton-->
+<!--                        style="@style/radio"-->
+<!--                        android:text="no matter" />-->
+
+<!--                    <Spinner-->
+<!--                        android:id="@+id/eyes_color_spinner5"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/fillFormEditText" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="40dp"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <TextView-->
+<!--                        style="@style/input_label"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:text="Color of eyes" />-->
+
+<!--                    <RadioButton-->
+<!--                        style="@style/radio"-->
+<!--                        android:text="no matter" />-->
+
+<!--                    <Spinner-->
+<!--                        android:id="@+id/eyes_color_spinner4"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/fillFormEditText" />-->
+<!--                </LinearLayout>-->
 
 
-                <Button
-                    android:id="@+id/confirm_button"
-                    style="@style/login_registrate_button"
-                    android:layout_gravity="left"
-                    android:background="@drawable/login_regirstrate_button_background_boy"
-                    android:text="Confirm"
-                    app:backgroundTint="#00FFFFFF"
-                    app:backgroundTintMode="src_over" />
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="40dp"-->
+<!--                    android:orientation="vertical">-->
 
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+<!--                    <TextView-->
+<!--                        style="@style/input_label"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:text="Add something you wanna find" />-->
+
+<!--                    <EditText-->
+<!--                        android:id="@+id/editTextTextMultiLine"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="195dp"-->
+<!--                        android:background="@drawable/fillFormEditText"-->
+<!--                        android:ems="10"-->
+<!--                        android:gravity="start|top"-->
+<!--                        android:inputType="textMultiLine"-->
+<!--                        android:padding="5dp" />-->
+<!--                </LinearLayout>-->
+
+
+<!--                <Button-->
+<!--                    android:id="@+id/confirm_button"-->
+<!--                    style="@style/login_registrate_button"-->
+<!--                    android:layout_gravity="left"-->
+<!--                    android:background="@drawable/login_regirstrate_button_background_boy"-->
+<!--                    android:text="Confirm"-->
+<!--                    app:backgroundTint="#00FFFFFF"-->
+<!--                    app:backgroundTintMode="src_over" />-->
+
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
+<!--    </ScrollView>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

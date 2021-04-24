@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SamsungNormalAnnualProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".BottomMenu"></activity>
+        <activity android:name=".UploadImageActivity"></activity>
+        <activity android:name=".BottomMenu" />
         <activity android:name=".UserDataActivity" />
         <activity android:name=".ViewingNominationsActvity" />
         <activity android:name=".WhatKindOfPeopleLookinFor" />

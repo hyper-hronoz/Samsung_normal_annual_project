@@ -7,10 +7,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.samsungnormalannualproject.API.JSONPlaceHolderApi;
 import com.example.samsungnormalannualproject.API.NetworkServiceResponse;
+import com.example.samsungnormalannualproject.Erors.UserErrors.ToastError;
 import com.example.samsungnormalannualproject.Models.RegisteredUser;
+import com.example.samsungnormalannualproject.Models.UploadImage;
 import com.example.samsungnormalannualproject.Models.User;
 import com.example.samsungnormalannualproject.Utils.HashMapPreferences;
 import com.google.gson.GsonBuilder;
@@ -60,7 +63,11 @@ public class UserDataActivity extends BaseActivity {
                     HashMapPreferences.saveMap(getApplicationContext(), getString(R.string.userInfo), response.body().getUserInfo());
                     Map<String, String> userInfo = response.body().getUserInfo();
                     Log.d("userInfo", String.valueOf(response.body().getUserInfo().size()));
-                    if (userInfo.size() == 1) {
+                    if (response.body().getUserPhoto() == "") {
+                        Intent intent = new Intent(getApplicationContext(), UploadImageActivity.class);
+                        startActivity(intent);
+                    }
+                    else if (userInfo.size() == 1) {
                         Intent intent = new Intent(getApplicationContext(), SignUpForm.class);
                         startActivity(intent);
                     } else {
@@ -76,7 +83,7 @@ public class UserDataActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<RegisteredUser> call, Throwable t) {
-                System.out.println(t);
+                Log.e("UserGetData", "сервер кажись лежит");
             }
         });
 

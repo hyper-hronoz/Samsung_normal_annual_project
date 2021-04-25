@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +56,7 @@ public class Profile extends Fragment {
     private TextView aboutTextView;
     private TextView nominationHeadingTextView;
     private RegisteredUser registeredUser;
+    private ImageButton likedUsers;
 
     /**
      * Use this factory method to create a new instance of
@@ -169,6 +171,7 @@ public class Profile extends Fragment {
         this.profilePhotoImageView = v.findViewById(R.id.profilePhoto);
         this.logoutButton = v.findViewById(R.id.logout);
         this.settingButton = v.findViewById(R.id.settings);
+        this.likedUsers = v.findViewById(R.id.liked);
 
         this.logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,6 +187,14 @@ public class Profile extends Fragment {
                 startActivity(intent);
             }
         });
+
+//        this.likedUsers.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getContext(), LikedUsers.class);
+//                startActivity(intent);
+//            }
+//        });
 
         getCurrentUserData();
 

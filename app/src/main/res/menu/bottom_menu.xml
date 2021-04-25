@@ -10,7 +10,7 @@
         android:icon="@drawable/ic_search"
         android:title="Search" />
     <item
-        android:id="@+id/chats"
-        android:icon="@drawable/ic_chat"
-        android:title="Messages" />
+        android:id="@+id/liked"
+        android:icon="@drawable/ic_heart"
+        android:title="liked" />
 </menu>

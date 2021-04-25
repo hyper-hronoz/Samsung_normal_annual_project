@@ -90,5 +90,12 @@
         <item name="android:background">@drawable/fill_form_edit_text</item>
     </style>
 
+    <style name="social_icons">
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
 
 </resources>

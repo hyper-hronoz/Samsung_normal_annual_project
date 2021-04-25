@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/fill_form_edit_text"
+        android:padding="4dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/profile"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:srcCompat="@drawable/depositphotos_134255710_stock_illustration_avatar_vector_male_profile_gray__1_" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/user_heading"
+                android:layout_width="wrap_content"
+                android:clickable="true"
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:fontFamily="@font/nunito_semibold"
+                tools:text="......................" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content">
+
+
+                <ImageButton
+                    android:id="@+id/instagram"
+                    android:background="@color/white"
+                    style="@style/social_icons"
+                    android:clickable="true"
+                    app:srcCompat="@drawable/ic_instagram"
+                    tools:ignore="VectorDrawableCompat" />
+
+                <ImageButton
+                    android:id="@+id/facebook"
+                    android:background="@color/white"
+                    style="@style/social_icons"
+                    android:clickable="true"
+                    app:srcCompat="@drawable/ic_facebook"
+                    tools:ignore="VectorDrawableCompat" />
+
+                <ImageButton
+                    android:id="@+id/vk"
+                    android:clickable="true"
+                    style="@style/social_icons"
+                    app:srcCompat="@drawable/ic_vk"
+                    android:background="@color/white"
+                    tools:ignore="VectorDrawableCompat" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

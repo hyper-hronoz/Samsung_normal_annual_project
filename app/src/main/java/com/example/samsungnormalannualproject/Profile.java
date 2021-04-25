@@ -83,6 +83,7 @@ public class Profile extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     private void logOut() {
@@ -173,6 +174,7 @@ public class Profile extends Fragment {
         this.settingButton = v.findViewById(R.id.settings);
         this.likedUsers = v.findViewById(R.id.liked);
 
+
         this.logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,6 +190,9 @@ public class Profile extends Fragment {
             }
         });
 
+
+        getCurrentUserData();
+
 //        this.likedUsers.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -196,7 +201,6 @@ public class Profile extends Fragment {
 //            }
 //        });
 
-        getCurrentUserData();
 
         return v;
     }

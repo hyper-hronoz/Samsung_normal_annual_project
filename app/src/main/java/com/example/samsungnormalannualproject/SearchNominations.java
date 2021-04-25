@@ -56,6 +56,8 @@ public class SearchNominations extends Fragment {
     private TextView nominationHeadingTextView;
     private ImageButton likeImageButton;
 
+    public static Context context;
+
     private RegisteredUser registeredUser;
 
     public SearchNominations() {
@@ -87,14 +89,7 @@ public class SearchNominations extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        this.view = getView();
-
-
-
-
-
-        getRandomUser();
+        context = getContext();
     }
 
 
@@ -140,13 +135,19 @@ public class SearchNominations extends Fragment {
         this.nominationHeadingTextView.setText(response.body().getUsername());
         this.nominationAgeTextView.setText(String.valueOf(response.body().getAge()));
         this.aboutTextView.setText(response.body().getAboutUser());
-
         if (URLUtil.isValidUrl(response.body().getUserPhoto())) {
-            Glide.with(getContext()).load(response.body().getUserPhoto()).into(this.profilePhotoImageView);
+            Glide.with(context).load(response.body().getUserPhoto()).into(this.profilePhotoImageView);
         } else {
-            Glide.with(getContext()).load("https://st3.depositphotos.com/4111759/13425/v/450/depositphotos_134255710-stock-illustration-avatar-vector-male-profile-gray.jpg").into(this.profilePhotoImageView);
+            Glide.with(context).load("https://st3.depositphotos.com/4111759/13425/v/450/depositphotos_134255710-stock-illustration-avatar-vector-male-profile-gray.jpg").into(this.profilePhotoImageView);
         }
+//        setImage(response);
     }
+
+//    private void setImage(Response<RegisteredUser> response) {
+//        if (getActivity() == null) {
+//            return;
+//        }
+//    }
 
     private void like() {
         Log.d("liked" ,"true");
@@ -196,11 +197,11 @@ public class SearchNominations extends Fragment {
 
         v.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
             public void onSwipeTop() {
-                Toast.makeText(getActivity(), "TOP SWIPE", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "TOP SWIPE", Toast.LENGTH_SHORT).show();
             }
 
             public void onSwipeRight() {
-                Toast.makeText(getActivity(), "RIGHT SWIPE", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "RIGHT SWIPE", Toast.LENGTH_SHORT).show();
                 //go back to landing page
                 // Intent intent = new Intent (getApplicationContext(), MainScreen.class);
                 // startActivity (intent);
@@ -211,7 +212,7 @@ public class SearchNominations extends Fragment {
             }
 
             public void onSwipeBottom() {
-                Toast.makeText(getActivity(), "BOTTOM SWIPE", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "BOTTOM SWIPE", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -221,6 +222,9 @@ public class SearchNominations extends Fragment {
                 like();
             }
         });
+
+
+        getRandomUser();
 
         return v;
     }

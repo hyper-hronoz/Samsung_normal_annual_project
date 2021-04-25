@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_search_nominations" />
     <fragment
         android:id="@+id/liked"
-        android:name="com.example.samsungnormalannualproject.LIked"
+        android:name="com.example.samsungnormalannualproject.Liked"
         android:label="fragment_chats"
         tools:layout="@layout/fragment_liked" />
 </navigation>

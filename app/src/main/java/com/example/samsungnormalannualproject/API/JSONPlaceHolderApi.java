@@ -4,8 +4,11 @@ package com.example.samsungnormalannualproject.API;
 import android.content.SharedPreferences;
 
 import com.example.samsungnormalannualproject.Models.RegisteredUser;
+import com.example.samsungnormalannualproject.Models.RegisteredUsers;
 import com.example.samsungnormalannualproject.Models.UploadImage;
 import com.example.samsungnormalannualproject.Models.User;
+
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -42,4 +45,6 @@ public interface JSONPlaceHolderApi {
     @POST("/action/like")
     Call<RegisteredUser> likeUser(@Header("Authorization") String token, @Body RegisteredUser registeredUser);
 
+    @GET("/action/liked")
+    Call<RegisteredUsers> getLikedUsers(@Header("Authorization") String token);
 }

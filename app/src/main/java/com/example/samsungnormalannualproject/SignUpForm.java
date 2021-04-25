@@ -74,6 +74,10 @@ public class SignUpForm extends BaseActivity {
     private EditText userAboutEditText;
     private EditText userAgeEditText;
 
+    private EditText instagram;
+    private EditText facebook;
+    private EditText vk;
+
     private Uri imageURi;
 
     private Bitmap bitmap;
@@ -122,6 +126,9 @@ public class SignUpForm extends BaseActivity {
         this.userHeightEditText = findViewById(R.id.height);
         this.userAboutEditText = findViewById(R.id.aboutUser);
         this.userAgeEditText = findViewById(R.id.age);
+        this.instagram = findViewById(R.id.instagram);
+        this.facebook = findViewById(R.id.facebook);
+        this.vk = findViewById(R.id.vk);
 
 
 
@@ -216,6 +223,9 @@ public class SignUpForm extends BaseActivity {
             String aboutUser = this.userAboutEditText.getText().toString().trim();
             String eyesColor = this.eyesColorEditText.getText().toString().trim();
             String hairsColor = this.hairColorEditText.getText().toString().trim();
+            String instagramLink = this.instagram.getText().toString().trim();
+            String facebookLink = this.facebook.getText().toString().trim();
+            String vkLink = this.vk.getText().toString().trim();
 
             Log.d("User height", String.valueOf(height));
             Log.d("User age", String.valueOf(age));
@@ -251,6 +261,12 @@ public class SignUpForm extends BaseActivity {
             } else {
                 new ToastError(getApplicationContext(), "Hair color is incorrect");
             }
+            if (facebookLink == "" && instagramLink == "" && vkLink == "") {
+                new ToastError(getApplicationContext(), "Not less than one social link");
+            }
+            registeredUser.setVkProfile(vkLink);
+            registeredUser.setInstagramProfle(instagramLink);
+            registeredUser.setFacebookProfile(facebookLink);
         } catch (Error e) {
             Log.e("SingUpForm error" , e.getMessage());
         }

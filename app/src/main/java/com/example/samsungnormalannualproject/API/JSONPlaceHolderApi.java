@@ -38,4 +38,8 @@ public interface JSONPlaceHolderApi {
 
     @GET("/find/user")
     Call<RegisteredUser> findUser(@Header("Authorization") String token);
+
+    @POST("/action/like")
+    Call<RegisteredUser> likeUser(@Header("Authorization") String token, @Body RegisteredUser registeredUser);
+
 }

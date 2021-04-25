@@ -52,8 +52,16 @@
                 android:id="@+id/login_confirm"
                 style="@style/login_registrate_button"
                 android:text="Confirm"
+                android:layout_marginBottom="25dp"
                 app:backgroundTint="#00FFFFFF"
                 app:backgroundTintMode="src_over" />
+
+            <TextView
+                android:id="@+id/haveAccount"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Do not have an account?" />
 
         </LinearLayout>
 

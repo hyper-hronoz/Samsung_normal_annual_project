@@ -39,6 +39,7 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -130,7 +131,7 @@ public class SignUpForm extends BaseActivity {
         String userData = sharedPref.getString(getString(R.string.userData), "");
 
         RegisteredUser registeredUser = new Gson().fromJson(userData, RegisteredUser.class);
-        this.gender = registeredUser.userInfo.get("gender");
+        this.gender = registeredUser.getGender();
 
         Log.d("userInfo is", "onCreate: " + this.gender);
 
@@ -191,14 +192,6 @@ public class SignUpForm extends BaseActivity {
 
 
     private void updateUserData() {
-        Map<String, String> registeredUserInfo = new HashMap<String, String>();
-
-        registeredUserInfo.put("gender", this.gender);
-        registeredUserInfo.put("eyesColor", this.userHeightEditText.getText().toString());
-        registeredUserInfo.put("hairsColor", this.hairColorEditText.getText().toString());
-        registeredUserInfo.put("height", this.userHeightEditText.getText().toString());
-        registeredUserInfo.put("aboutUser", this.userAboutEditText.getText().toString());
-        registeredUserInfo.put("age", this.userAgeEditText.getText().toString());
 
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.userSharedPreferencesKey), Context.MODE_PRIVATE);
         String user = sharedPref.getString(getString(R.string.userData), "");
@@ -216,7 +209,52 @@ public class SignUpForm extends BaseActivity {
                 .build();
 
         RegisteredUser registeredUser = gson.fromJson(user, RegisteredUser.class);
-        registeredUser.setUserInfo(registeredUserInfo);
+
+        try {
+            int height = Integer.parseInt(this.userHeightEditText.getText().toString().trim());
+            int age = Integer.parseInt(this.userAgeEditText.getText().toString().trim());
+            String aboutUser = this.userAboutEditText.getText().toString().trim();
+            String eyesColor = this.eyesColorEditText.getText().toString().trim();
+            String hairsColor = this.hairColorEditText.getText().toString().trim();
+
+            Log.d("User height", String.valueOf(height));
+            Log.d("User age", String.valueOf(age));
+            Log.d("User about", String.valueOf(aboutUser));
+            Log.d("User eyesColor", String.valueOf(eyesColor));
+            Log.d("User hairsColor", String.valueOf(hairsColor));
+
+            if (height != 0) {
+                registeredUser.setHeight(height);
+            } else {
+                new ToastError(getApplicationContext(), "Height must be number");
+            }
+            if (age != 0) {
+                registeredUser.setAge(age);
+            } else {
+                new ToastError(getApplicationContext(), "Age must be number");
+            }
+            if (aboutUser != "") {
+                registeredUser.setAboutUser(aboutUser);
+            }
+            else if (aboutUser.length() < 30) {
+                new ToastError(getApplicationContext(), "About user must contains not less than 30 symbols");
+            } else {
+                new ToastError(getApplicationContext(), "About user is incorrect");
+            }
+            if (eyesColor != "") {
+                registeredUser.setEyesColor(eyesColor);
+            } else {
+                new ToastError(getApplicationContext(), "Eys color is incorrect");
+            }
+            if (hairsColor != "") {
+                registeredUser.setHairColor(hairsColor);
+            } else {
+                new ToastError(getApplicationContext(), "Hair color is incorrect");
+            }
+        } catch (Error e) {
+            Log.e("SingUpForm error" , e.getMessage());
+        }
+
 
         JSONPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JSONPlaceHolderApi.class);
 

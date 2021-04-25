@@ -93,9 +93,16 @@
                     android:layout_gravity="center"
                     android:background="@drawable/login_regirstrate_button_background_boy"
                     android:text="Confirm"
+                    android:layout_marginBottom="25dp"
                     app:backgroundTint="#00FFFFFF"
                     app:backgroundTintMode="src_over" />
 
+                <TextView
+                    android:id="@+id/haveAccount"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Already have an account?" />
             </LinearLayout>
 
         </LinearLayout>

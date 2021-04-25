@@ -1,49 +1,77 @@
 package com.example.samsungnormalannualproject.Models;
 
+import android.content.Intent;
+
 import com.example.samsungnormalannualproject.SignUpActivity;
 
 import java.util.Map;
 
 public class RegisteredUser extends User  {
-    public Map<String, String> userInfo;
+    public int age;
+    public int height;
+
+    public String hairColor;
+    public String eyesColor;
+    public String aboutUser;
     public String userPhoto;
 
-    public RegisteredUser(String username, Map<String, String> userInfo) {
+    public RegisteredUser(String username, String password, String gender) {
+        super(username, password, gender);
+    }
+
+    public RegisteredUser(String username, int age, String hairColor, String eyesColor, String aboutUser, String userPhoto) {
         super(username);
-        this.userInfo = userInfo;
+        this.aboutUser = aboutUser;
+        this.hairColor = hairColor;
+        this.eyesColor = eyesColor;
+        this.userPhoto = userPhoto;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setHairColor(String hairColor) {
+        this.hairColor = hairColor;
+    }
+
+    public void setEyesColor(String eyesColor) {
+        this.eyesColor = eyesColor;
+    }
+
+    public void setAboutUser(String aboutUser) {
+        this.aboutUser = aboutUser;
     }
 
     public void setUserPhoto(String userPhoto) {
         this.userPhoto = userPhoto;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public String getHairColor() {
+        return hairColor;
+    }
+
+    public String getEyesColor() {
+        return eyesColor;
+    }
+
+    public String getAboutUser() {
+        return aboutUser;
+    }
+
     public String getUserPhoto() {
         return userPhoto;
-    }
-
-    public RegisteredUser(String username, Map<String, String> userInfo, String userPhoto) {
-        super(username);
-        this.userInfo = userInfo;
-        this.userPhoto = userPhoto;
-    }
-
-    public RegisteredUser(String username) {
-        super(username);
-    }
-
-    public Map<String, String> getUserInfo() {
-        return userInfo;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setUserInfo(Map<String, String> userInfo) {
-        this.userInfo = userInfo;
     }
 }

@@ -1,12 +1,31 @@
 package com.example.samsungnormalannualproject;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.example.samsungnormalannualproject.API.JSONPlaceHolderApi;
+import com.example.samsungnormalannualproject.Models.RegisteredUser;
+import com.google.gson.GsonBuilder;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,9 +43,18 @@ public class Profile extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private ImageButton logoutButton;
+    private ImageButton settingButton;
+
     public Profile() {
         // Required empty public constructor
     }
+
+    private TextView nominationAgeTextView;
+    private ImageView profilePhotoImageView;
+    private TextView aboutTextView;
+    private TextView nominationHeadingTextView;
+    private RegisteredUser registeredUser;
 
     /**
      * Use this factory method to create a new instance of
@@ -55,10 +83,110 @@ public class Profile extends Fragment {
         }
     }
 
+    private void logOut() {
+        Log.d("Key is", getString(R.string.JWTTokenSharedPreferencesKey));
+        SharedPreferences sharedPref = getActivity().getApplicationContext().getSharedPreferences(getString(R.string.JWTTokenSharedPreferencesKey), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.clear();
+        editor.commit();
+
+        SharedPreferences sharedPref2 = getActivity().getApplicationContext().getSharedPreferences(getString(R.string.JWTTokenSharedPreferencesKey), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = sharedPref2.edit();
+        editor2.clear().commit();
+        editor2.apply();
+
+        Intent intent = new Intent(getContext(), LoginOrSignUp.class);
+        startActivity(intent);
+    }
+
+    private void getCurrentUserData() {
+        SharedPreferences sharedPrefToken = getContext().getSharedPreferences(getString(R.string.JWTTokenSharedPreferencesKey), Context.MODE_PRIVATE);
+        String JWTToken = sharedPrefToken.getString(getString(R.string.JWTToken), "");
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(NetworkConfig.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        JSONPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JSONPlaceHolderApi.class);
+
+        Call<RegisteredUser> call = jsonPlaceHolderApi.getUserData("Bearer "+ JWTToken);
+
+        call.enqueue(new Callback<RegisteredUser>() {
+            @Override
+            public void onResponse(Call<RegisteredUser> call, Response<RegisteredUser> response) {
+                Log.d("Response code", String.valueOf(response.code()));
+                Log.d("GetUserDataResponse", "onResponse: " + new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                if (response.code() == 401) {
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    SharedPreferences sharedPref = getContext().getSharedPreferences(getString(R.string.userSharedPreferencesKey), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString(getString(R.string.userData), new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+
+                    if (response.body().getUserPhoto() == "" || response.body().getUserPhoto() == null) {
+                        Intent intent = new Intent(getContext(), UploadImageActivity.class);
+                        startActivity(intent);
+                    }
+                    else if (response.body().getAge() == 0 && response.body().height == 0 && (response.body().hairColor == null || response.body().hairColor.trim() == "")) {
+                        Intent intent = new Intent(getContext(), SignUpForm.class);
+                        startActivity(intent);
+                    } else {
+                        setCurrentUserData(response);
+                    }
+                    editor.commit();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegisteredUser> call, Throwable t) {
+                Log.e("UserGetData", "сервер кажись лежит");
+            }
+        });
+    }
+
+    private void setCurrentUserData(Response<RegisteredUser> response) {
+        this.nominationHeadingTextView.setText(response.body().getUsername());
+        this.nominationAgeTextView.setText(String.valueOf(response.body().getAge()));
+        this.aboutTextView.setText(response.body().getAboutUser());
+        if (URLUtil.isValidUrl(response.body().getUserPhoto())) {
+            Glide.with(getContext()).load(response.body().getUserPhoto()).into(this.profilePhotoImageView);
+        } else {
+            Glide.with(getContext()).load("https://st3.depositphotos.com/4111759/13425/v/450/depositphotos_134255710-stock-illustration-avatar-vector-male-profile-gray.jpg").into(this.profilePhotoImageView);
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View v = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        this.aboutTextView = v.findViewById(R.id.about);
+        this.nominationAgeTextView = v.findViewById(R.id.nomination_age);
+        this.nominationHeadingTextView = v.findViewById(R.id.nomination_heading);
+        this.profilePhotoImageView = v.findViewById(R.id.profilePhoto);
+        this.logoutButton = v.findViewById(R.id.logout);
+        this.settingButton = v.findViewById(R.id.settings);
+
+        this.logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logOut();
+            }
+        });
+
+        this.settingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), SignUpForm.class);
+                startActivity(intent);
+            }
+        });
+
+        getCurrentUserData();
+
+        return v;
     }
 }

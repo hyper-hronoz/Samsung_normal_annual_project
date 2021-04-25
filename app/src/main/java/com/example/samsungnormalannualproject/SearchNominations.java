@@ -11,14 +11,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.samsungnormalannualproject.API.JSONPlaceHolderApi;
+import com.example.samsungnormalannualproject.Erors.UserErrors.ToastError;
 import com.example.samsungnormalannualproject.Models.RegisteredUser;
 import com.example.samsungnormalannualproject.Models.UploadImage;
+import com.example.samsungnormalannualproject.Models.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -50,6 +54,9 @@ public class SearchNominations extends Fragment {
     private ImageView profilePhotoImageView;
     private TextView aboutTextView;
     private TextView nominationHeadingTextView;
+    private ImageButton likeImageButton;
+
+    private RegisteredUser registeredUser;
 
     public SearchNominations() {
         // Required empty public constructor
@@ -109,11 +116,13 @@ public class SearchNominations extends Fragment {
         call.enqueue(new Callback<RegisteredUser>() {
             @Override
             public void onResponse(Call<RegisteredUser> call, Response<RegisteredUser> response) {
-                Log.d("Login status code is", String.valueOf(response.code()));
-                Log.d("Login response body is", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                Log.d("Search status code is", String.valueOf(response.code()));
+                Log.d("Search response body is", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
                 if (response.code() == 401) {
                     Intent intent = new Intent(getContext(), LoginActivity.class);
                     startActivity(intent);
+                } else if (response.code() == 500) {
+                    new ToastError(getContext(), "we apologize, but the user cannot be found INTERNAL SERVER ERROR");
                 } else {
                     setFindUser(response);
                 }
@@ -127,11 +136,51 @@ public class SearchNominations extends Fragment {
     }
 
     private void setFindUser(Response<RegisteredUser> response) {
+        this.registeredUser = response.body();
         this.nominationHeadingTextView.setText(response.body().getUsername());
-        this.nominationAgeTextView.setText(response.body().getUserInfo().get("age") == null ? "" : "age " + response.body().getUserInfo().get("age"));
-        this.aboutTextView.setText(response.body().userInfo.get("aboutUser"));
-        Glide.with(getContext()).load(response.body().getUserPhoto()).into(this.profilePhotoImageView);
+        this.nominationAgeTextView.setText(String.valueOf(response.body().getAge()));
+        this.aboutTextView.setText(response.body().getAboutUser());
 
+        if (URLUtil.isValidUrl(response.body().getUserPhoto())) {
+            Glide.with(getContext()).load(response.body().getUserPhoto()).into(this.profilePhotoImageView);
+        } else {
+            Glide.with(getContext()).load("https://st3.depositphotos.com/4111759/13425/v/450/depositphotos_134255710-stock-illustration-avatar-vector-male-profile-gray.jpg").into(this.profilePhotoImageView);
+        }
+    }
+
+    private void like() {
+        Log.d("liked" ,"true");
+        SharedPreferences sharedPref = getContext().getSharedPreferences(getString(R.string.JWTTokenSharedPreferencesKey), Context.MODE_PRIVATE);
+        String JWTToken = sharedPref.getString(getString(R.string.JWTToken), "");
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(NetworkConfig.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        JSONPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JSONPlaceHolderApi.class);
+
+        Log.d("JWT is" , JWTToken);
+
+        Call<RegisteredUser> call = jsonPlaceHolderApi.likeUser("Bearer " + JWTToken, this.registeredUser);
+
+        call.enqueue(new Callback<RegisteredUser>() {
+            @Override
+            public void onResponse(Call<RegisteredUser> call, Response<RegisteredUser> response) {
+                Log.d("Search status code is", String.valueOf(response.code()));
+                Log.d("Search response body is", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                if (response.code() == 401) {
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                } else {
+
+                }
+            }
+            @Override
+            public void onFailure(Call<RegisteredUser> call, Throwable t) {
+                Log.e("Search error", t.getMessage());
+            }
+        });
     }
 
     @Override
@@ -143,6 +192,7 @@ public class SearchNominations extends Fragment {
         this.nominationAgeTextView = v.findViewById(R.id.nomination_age);
         this.nominationHeadingTextView = v.findViewById(R.id.nomination_heading);
         this.profilePhotoImageView = v.findViewById(R.id.profilePhoto);
+        this.likeImageButton = v.findViewById(R.id.like);
 
         v.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
             public void onSwipeTop() {
@@ -162,6 +212,13 @@ public class SearchNominations extends Fragment {
 
             public void onSwipeBottom() {
                 Toast.makeText(getActivity(), "BOTTOM SWIPE", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        this.likeImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                like();
             }
         });
 

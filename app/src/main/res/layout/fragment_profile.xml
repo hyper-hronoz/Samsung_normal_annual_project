@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:fontFamily="@font/nunito_semibold"
-                    android:text="Elena Elaza"
+                    android:text="................."
                     android:textColor="@color/black"
                     android:textSize="33dp" />
 
@@ -53,7 +53,7 @@
                     android:layout_alignParentRight="true"
                     android:fontFamily="@font/nunito_semibold"
                     android:paddingBottom="4dp"
-                    android:text="age 24"
+                    android:text="......"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -61,13 +61,15 @@
 
 
         </LinearLayout>
+
         <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/settings"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_vertical"
-            android:background="@color/white"
             android:layout_weight="1"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_baseline_settings_24" />
 
     </LinearLayout>
@@ -80,7 +82,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp"
         android:adjustViewBounds="true"
-        app:srcCompat="@drawable/image_profile"
+        app:srcCompat="@drawable/depositphotos_134255710_stock_illustration_avatar_vector_male_profile_gray__1_"
         tools:ignore="VectorDrawableCompat" />
 
     <TextView
@@ -88,12 +90,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profilePhoto"
-        android:layout_centerHorizontal="true"
+        android:layout_alignStart="@+id/profilePhoto"
+        android:layout_alignLeft="@+id/profilePhoto"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
         android:layout_marginTop="16dp"
-        android:text="В мире есть около 20 миллионов более интересных занятий, чем удаление фона вручную. Благодаря умному ИИ сайта remove.bg вы можете сократить время на редактирование и получить больше удовольствия!"
+        android:text=".................................................."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageButton
+        android:id="@+id/logout"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/about"
+        android:layout_alignStart="@+id/about"
+        android:layout_alignLeft="@+id/about"
+        android:layout_marginTop="45dp"
+        android:scaleType="fitXY"
+        android:background="@color/white"
+        app:srcCompat="@drawable/ic_logout"
+        tools:ignore="VectorDrawableCompat" />
 
 
 </RelativeLayout>

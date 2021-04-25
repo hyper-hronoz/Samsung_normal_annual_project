@@ -2,15 +2,19 @@ package com.example.samsungnormalannualproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.samsungnormalannualproject.API.JSONPlaceHolderApi;
 import com.example.samsungnormalannualproject.API.NetworkServiceResponse;
 import com.example.samsungnormalannualproject.Erors.UserErrors.ToastError;
 import com.example.samsungnormalannualproject.Models.User;
 import com.example.samsungnormalannualproject.Utils.InputDataValidator;
+
+import org.w3c.dom.Text;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,6 +35,8 @@ public class SignUpActivity extends BaseActivity {
     private String login;
     private String password;
     private String password_2;
+
+    private TextView haveAccount;
 
     private String gender;
 
@@ -64,6 +70,7 @@ public class SignUpActivity extends BaseActivity {
         this.loginEditText = (EditText) findViewById(R.id.login_login);
         this.passwordEditText = (EditText) findViewById(R.id.login_password);
         this.passwordAgainEditText = (EditText) findViewById(R.id.editText_password_again);
+        this.haveAccount = (TextView) findViewById(R.id.haveAccount);
 
         setBackGround();
 
@@ -77,12 +84,25 @@ public class SignUpActivity extends BaseActivity {
                 getEditTextData();
             }
         });
+
+        this.haveAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public class Register {
-        User user;
+        public User user;
 
         public Register(User user) {
+
+            Log.d("User gender", user.gender);
+            Log.d("User username", user.username);
+            Log.d("user userpassword", user.password);
+
             this.user = user;
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(NetworkConfig.BASE_URL)

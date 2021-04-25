@@ -157,7 +157,7 @@ public class UploadImageActivity extends BaseActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    Intent intent = new Intent(getApplicationContext(), BottomMenu.class);
+                    Intent intent = new Intent(getApplicationContext(), UserDataActivity.class);
                     startActivity(intent);
                 }
             }

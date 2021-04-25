@@ -46,13 +46,13 @@ public class UserDataActivity extends BaseActivity {
 
         JSONPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JSONPlaceHolderApi.class);
 
-        Call<RegisteredUser> call = jsonPlaceHolderApi.getUserData("Bearer " + JWTToken);
-
+        Call<RegisteredUser> call = jsonPlaceHolderApi.getUserData("Bearer "+ JWTToken);
 
         call.enqueue(new Callback<RegisteredUser>() {
             @Override
             public void onResponse(Call<RegisteredUser> call, Response<RegisteredUser> response) {
-                System.out.println("Status code is: " + response.code());
+                Log.d("Response code", String.valueOf(response.code()));
+                Log.d("GetUserDataResponse", "onResponse: " + new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
                 if (response.code() == 401) {
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
@@ -60,14 +60,12 @@ public class UserDataActivity extends BaseActivity {
                     SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.userSharedPreferencesKey), Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString(getString(R.string.userData), new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
-                    HashMapPreferences.saveMap(getApplicationContext(), getString(R.string.userInfo), response.body().getUserInfo());
-                    Map<String, String> userInfo = response.body().getUserInfo();
-                    Log.d("userInfo", String.valueOf(response.body().getUserInfo().size()));
-                    if (response.body().getUserPhoto() == "") {
+
+                    if (response.body().getUserPhoto() == "" || response.body().getUserPhoto() == null) {
                         Intent intent = new Intent(getApplicationContext(), UploadImageActivity.class);
                         startActivity(intent);
                     }
-                    else if (userInfo.size() == 1) {
+                    else if (response.body().getAge() == 0 && response.body().height == 0 && (response.body().hairColor == null || response.body().hairColor.trim() == "")) {
                         Intent intent = new Intent(getApplicationContext(), SignUpForm.class);
                         startActivity(intent);
                     } else {
@@ -75,10 +73,7 @@ public class UserDataActivity extends BaseActivity {
                         startActivity(intent);
                     }
                     editor.commit();
-                    Log.d("Call", "onResponse: " + call);
-                    Log.d("GetUserDataResponse", "onResponse: " + new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
                 }
-                finish();
             }
 
             @Override

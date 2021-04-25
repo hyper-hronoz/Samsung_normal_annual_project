@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.samsungnormalannualproject.API.JSONPlaceHolderApi;
 import com.example.samsungnormalannualproject.API.NetworkServiceResponse;
@@ -36,6 +37,8 @@ public class LoginActivity extends BaseActivity {
 
     private String gender;
     private View view;
+
+    private TextView haveAccount;
 
     private void setBackGround() {
 
@@ -65,6 +68,7 @@ public class LoginActivity extends BaseActivity {
         this.loginEditText = findViewById(R.id.login_login);
         this.passwordEditText = findViewById(R.id.login_password);
         this.button = findViewById(R.id.login_confirm);
+        this.haveAccount = findViewById(R.id.haveAccount);
 
         this.gender = SelectGenderActivity.gender;
 
@@ -76,6 +80,15 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 login();
+            }
+        });
+
+        this.haveAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SelectGenderActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -104,6 +117,7 @@ public class LoginActivity extends BaseActivity {
         public Login(User user, Context context) {
             this.user = user;
             System.out.println("Что отправляем: " + new GsonBuilder().setPrettyPrinting().create().toJson(user));
+
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(NetworkConfig.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())

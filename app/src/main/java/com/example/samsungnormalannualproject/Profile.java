@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.samsungnormalannualproject.API.JSONPlaceHolderApi;
 import com.example.samsungnormalannualproject.Models.RegisteredUser;
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import retrofit2.Call;
@@ -138,7 +139,7 @@ public class Profile extends Fragment {
                         Intent intent = new Intent(getContext(), SignUpForm.class);
                         startActivity(intent);
                     } else {
-                        setCurrentUserData(response);
+                        setCurrentUserData(response.body());
                     }
                     editor.commit();
                 }
@@ -151,14 +152,25 @@ public class Profile extends Fragment {
         });
     }
 
-    private void setCurrentUserData(Response<RegisteredUser> response) {
-        this.nominationHeadingTextView.setText(response.body().getUsername());
-        this.nominationAgeTextView.setText(String.valueOf(response.body().getAge()));
-        this.aboutTextView.setText(response.body().getAboutUser());
-        if (URLUtil.isValidUrl(response.body().getUserPhoto())) {
-            Glide.with(getContext()).load(response.body().getUserPhoto()).into(this.profilePhotoImageView);
+    private void setCurrentUserData(RegisteredUser registeredUser) {
+        this.nominationHeadingTextView.setText(registeredUser.getUsername());
+        this.nominationAgeTextView.setText(String.valueOf(registeredUser.getAge()));
+        this.aboutTextView.setText(registeredUser.getAboutUser());
+        if (URLUtil.isValidUrl(registeredUser.getUserPhoto())) {
+            Glide.with(getContext()).load(registeredUser.getUserPhoto()).into(this.profilePhotoImageView);
         } else {
             Glide.with(getContext()).load("https://st3.depositphotos.com/4111759/13425/v/450/depositphotos_134255710-stock-illustration-avatar-vector-male-profile-gray.jpg").into(this.profilePhotoImageView);
+        }
+    }
+
+    private void getLocalUserData() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.userSharedPreferencesKey), Context.MODE_PRIVATE);
+        String StringregisteredUser = sharedPreferences.getString(getString(R.string.userData), "");
+        Log.d("Local user data", StringregisteredUser);
+        if (StringregisteredUser == "") {
+
+        } else {
+            this.registeredUser = new Gson().fromJson(StringregisteredUser, RegisteredUser.class);
         }
     }
 
@@ -194,6 +206,7 @@ public class Profile extends Fragment {
 
 
         getCurrentUserData();
+        getLocalUserData();
 
 //        Intent i = new Intent(LoginOrSignUp., Profile.class);
 //        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)

@@ -11,6 +11,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="imageSharedPreferences">imageSharedPreferences</string>
+    <string name="likedSharedPreferences">likedSharedPreferences</string>
+    <string name="liked">liked</string>
 
 
     <string-array name="messages_persons">

@@ -1,5 +1,7 @@
 package com.example.samsungnormalannualproject;
 
+import java.lang.reflect.Type;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +28,9 @@ import com.example.samsungnormalannualproject.API.JSONPlaceHolderApi;
 import com.example.samsungnormalannualproject.Erors.UserErrors.ToastError;
 import com.example.samsungnormalannualproject.Models.RegisteredUser;
 import com.example.samsungnormalannualproject.Models.RegisteredUsers;
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,10 +110,23 @@ public class Liked extends Fragment {
 
         // Add the following lines to create RecyclerView
 
-
+        loadLocalData();
         mRecyclerView = v.findViewById(R.id.recyclerview);
 
         return v;
+    }
+
+    private void loadLocalData() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.likedSharedPreferences), Context.MODE_PRIVATE);
+        String stringRegisteredUsers = sharedPreferences.getString(getString(R.string.liked), "");
+        Log.d("Local liked", stringRegisteredUsers);
+        Type userListType = new TypeToken<ArrayList<RegisteredUser>>(){}.getType();
+        if (stringRegisteredUsers == "") {
+            return;
+        } else {
+            this.registeredUsers = new Gson().fromJson(stringRegisteredUsers, userListType);
+            Log.d("Username", registeredUsers.get(0).username);
+        }
     }
 
     private void getLikedUsers() {
@@ -133,8 +150,13 @@ public class Liked extends Fragment {
                 if (response.code() == 401) {
                     Intent intent = new Intent(getContext(), LoginActivity.class);
                     startActivity(intent);
-                } else {
-                    setRegisteredUsers(response);
+                }
+                else {
+                    SharedPreferences sharedPref = getActivity().getApplicationContext().getSharedPreferences(getString(R.string.likedSharedPreferences), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString(getString(R.string.liked), new GsonBuilder().setPrettyPrinting().create().toJson(response.body().getRegisteredUsers()));
+                    editor.commit();
+                    setRegisteredUsers(response.body().getRegisteredUsers());
                 }
             }
 
@@ -145,8 +167,8 @@ public class Liked extends Fragment {
         });
     }
 
-    private void setRegisteredUsers(Response<RegisteredUsers> response) {
-        this.registeredUsers = response.body().getRegisteredUsers();
+    private void setRegisteredUsers(List<RegisteredUser> registeredUsers) {
+        this.registeredUsers = registeredUsers;
         Log.d("User: ", String.valueOf(this.registeredUsers.get(0).username));
         buildRecyclerView();
     }
@@ -159,8 +181,8 @@ public class Liked extends Fragment {
     public void changeItem(int position, String social) {
         Log.d("item clicked", String.valueOf(position) + "; " + social);
         Uri uri = null;
-        if (social == "instagram" ) {
-           uri = Uri.parse(this.registeredUsers.get(position).instagramProfle);
+        if (social == "instagram") {
+            uri = Uri.parse(this.registeredUsers.get(position).instagramProfle);
         }
         if (social == "vk") {
             uri = Uri.parse(this.registeredUsers.get(position).vkProfile);
@@ -175,6 +197,7 @@ public class Liked extends Fragment {
         startActivity(browserIntent);
         this.mAdapter.notifyItemChanged(position);
     }
+
     public void buildRecyclerView() {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
@@ -186,6 +209,7 @@ public class Liked extends Fragment {
             public void onItemClick(int position, String social) {
                 changeItem(position, social);
             }
+
             @Override
             public void onDeleteClick(int position) {
 //                removeItem(position);

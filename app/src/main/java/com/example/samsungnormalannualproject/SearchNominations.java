@@ -131,16 +131,29 @@ public class SearchNominations extends Fragment {
     }
 
     private void setFindUser(Response<RegisteredUser> response) {
+        this.liked = false;
         this.registeredUser = response.body();
         this.nominationHeadingTextView.setText(response.body().getUsername());
-        this.nominationAgeTextView.setText(String.valueOf(response.body().getAge()));
+        this.nominationAgeTextView.setText("age " + String.valueOf(response.body().getAge()));
         this.aboutTextView.setText(response.body().getAboutUser());
         if (URLUtil.isValidUrl(response.body().getUserPhoto())) {
             Glide.with(context).load(response.body().getUserPhoto()).into(this.profilePhotoImageView);
         } else {
             Glide.with(context).load("https://st3.depositphotos.com/4111759/13425/v/450/depositphotos_134255710-stock-illustration-avatar-vector-male-profile-gray.jpg").into(this.profilePhotoImageView);
         }
-//        setImage(response);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.userSharedPreferencesKey), Context.MODE_PRIVATE);
+        String userData = sharedPreferences.getString(getString(R.string.userData), "");
+        Log.d("User data is ", userData);
+
+        RegisteredUser registeredUser = new Gson().fromJson(userData, RegisteredUser.class);
+
+        if (registeredUser.getUserLiked().contains(response.body().username)) {
+            this.liked = true;
+            Log.d("if user liked", "лайкнут уже");
+        }
+
+        ifLiked();
+
     }
 
 //    private void setImage(Response<RegisteredUser> response) {
@@ -149,8 +162,28 @@ public class SearchNominations extends Fragment {
 //        }
 //    }
 
+    private boolean liked;
+
+
+
+    private void ifLiked() {
+        if (liked) {
+            this.likeImageButton.setColorFilter(getResources().getColor(R.color.red));
+        } else {
+            this.likeImageButton.setColorFilter(getResources().getColor(R.color.black));
+        }
+    }
+
     private void like() {
         Log.d("liked" ,"true");
+        if (this.liked) {
+            this.liked = false;
+            ifLiked();
+        } else {
+            this.liked = true;
+            ifLiked();
+        }
+
         SharedPreferences sharedPref = getContext().getSharedPreferences(getString(R.string.JWTTokenSharedPreferencesKey), Context.MODE_PRIVATE);
         String JWTToken = sharedPref.getString(getString(R.string.JWTToken), "");
 
@@ -226,6 +259,41 @@ public class SearchNominations extends Fragment {
 
         getRandomUser();
 
+        SharedPreferences sharedPref = getContext().getSharedPreferences(getString(R.string.JWTTokenSharedPreferencesKey), Context.MODE_PRIVATE);
+        String JWTToken = sharedPref.getString(getString(R.string.JWTToken), "");
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(NetworkConfig.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        JSONPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JSONPlaceHolderApi.class);
+
+        Call<RegisteredUser> call = jsonPlaceHolderApi.getUserData("Bearer "+ JWTToken);
+
+        call.enqueue(new Callback<RegisteredUser>() {
+            @Override
+            public void onResponse(Call<RegisteredUser> call, Response<RegisteredUser> response) {
+                Log.d("Response code", String.valueOf(response.code()));
+                Log.d("GetUserDataResponse", "onResponse: " + new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                if (response.code() == 401) {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    SharedPreferences sharedPref = getActivity().getApplicationContext().getSharedPreferences(getString(R.string.userSharedPreferencesKey), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString(getString(R.string.userData), new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+
+                    editor.commit();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<RegisteredUser> call, Throwable t) {
+                Log.e("UserGetData", "сервер кажись лежит");
+            }
+        });
         return v;
     }
 }

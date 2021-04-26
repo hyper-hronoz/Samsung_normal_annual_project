@@ -112,20 +112,5 @@
         app:srcCompat="@drawable/ic_logout"
         tools:ignore="VectorDrawableCompat" />
 
-    <ImageButton
-        android:id="@+id/liked"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/about"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="45dp"
-        android:layout_toEndOf="@+id/logout"
-        android:layout_toRightOf="@+id/logout"
-        android:background="@color/white"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/ic_heart"
-        tools:ignore="VectorDrawableCompat" />
-
 
 </RelativeLayout>

@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.example.samsungnormalannualproject.SignUpActivity;
 
+import java.util.List;
 import java.util.Map;
 
 public class RegisteredUser extends User  {
@@ -17,8 +18,17 @@ public class RegisteredUser extends User  {
     public String instagramProfle;
     public String facebookProfile;
     public String vkProfile;
+    public List<String> userLiked;
 
-    public RegisteredUser(String aboutUser, int age, String eyesColor, String hairColor, int height, String userPhoto, String username, String vkProfile, String facebookProfile, String instagramProfle) {
+    public List<String> getUserLiked() {
+        return userLiked;
+    }
+
+    public void setUserLiked(List<String> userLiked) {
+        this.userLiked = userLiked;
+    }
+
+    public RegisteredUser(String aboutUser, int age, String eyesColor, String hairColor, int height, String userPhoto, String username, String vkProfile, String facebookProfile, String instagramProfle, List<String> userLiked) {
         super(username);
         this.aboutUser = aboutUser;
         this.age = age;
@@ -29,6 +39,7 @@ public class RegisteredUser extends User  {
         this.vkProfile = vkProfile;
         this.facebookProfile = facebookProfile;
         this.instagramProfle = instagramProfle;
+        this.userLiked = userLiked;
     }
 
 

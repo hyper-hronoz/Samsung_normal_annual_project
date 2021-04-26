@@ -125,7 +125,6 @@ public class Liked extends Fragment {
             return;
         } else {
             this.registeredUsers = new Gson().fromJson(stringRegisteredUsers, userListType);
-            Log.d("Username", registeredUsers.get(0).username);
         }
     }
 
@@ -169,7 +168,6 @@ public class Liked extends Fragment {
 
     private void setRegisteredUsers(List<RegisteredUser> registeredUsers) {
         this.registeredUsers = registeredUsers;
-        Log.d("User: ", String.valueOf(this.registeredUsers.get(0).username));
         buildRecyclerView();
     }
 
@@ -199,25 +197,27 @@ public class Liked extends Fragment {
     }
 
     public void buildRecyclerView() {
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mAdapter = new ExampleAdapter(getActivity(), this.registeredUsers);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position, String social) {
-                changeItem(position, social);
-            }
+        Log.d("Size is" , String.valueOf(this.registeredUsers.size()));
+        if (this.registeredUsers.size() == 0) {
+            return;
+        } else {
+            mRecyclerView.setHasFixedSize(true);
+            mLayoutManager = new LinearLayoutManager(getContext());
+            mAdapter = new ExampleAdapter(getActivity(), this.registeredUsers);
+            mRecyclerView.setLayoutManager(mLayoutManager);
+            mRecyclerView.setAdapter(mAdapter);
+            mAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position, String social) {
+                    changeItem(position, social);
+                }
 
-            @Override
-            public void onDeleteClick(int position) {
+                @Override
+                public void onDeleteClick(int position) {
 //                removeItem(position);
-            }
-        });
+                }
+            });
+        }
     }
 
 }
-
-
-

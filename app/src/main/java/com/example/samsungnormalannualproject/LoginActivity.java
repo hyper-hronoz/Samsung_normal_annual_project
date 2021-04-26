@@ -143,6 +143,7 @@ public class LoginActivity extends BaseActivity {
                         editor.commit();
                         Intent intent = new Intent(getApplicationContext(), UserDataActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                 }
 

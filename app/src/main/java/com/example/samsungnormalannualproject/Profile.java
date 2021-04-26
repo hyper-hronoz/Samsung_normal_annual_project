@@ -100,6 +100,8 @@ public class Profile extends Fragment {
 
         Intent intent = new Intent(getContext(), LoginOrSignUp.class);
         startActivity(intent);
+
+        getActivity().finish();
     }
 
     private void getCurrentUserData() {
@@ -192,6 +194,10 @@ public class Profile extends Fragment {
 
 
         getCurrentUserData();
+
+//        Intent i = new Intent(LoginOrSignUp., Profile.class);
+//        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+//        startActivity(i);
 
 //        this.likedUsers.setOnClickListener(new View.OnClickListener() {
 //            @Override

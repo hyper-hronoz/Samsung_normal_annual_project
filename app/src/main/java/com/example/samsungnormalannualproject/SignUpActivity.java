@@ -117,6 +117,19 @@ public class SignUpActivity extends BaseActivity {
                 @Override
                 public void onResponse(Call<NetworkServiceResponse> call, Response<NetworkServiceResponse> response) {
                     System.out.println(response);
+                    if (response.code() == 409) {
+                        new ToastError(getApplicationContext(), "User already exists");
+                    }
+                    else if (response.code() == 400) {
+                        new ToastError(getApplicationContext(), "Internal server error");
+                    }
+                    else if (response.code() == 200) {
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        new ToastError(getApplicationContext(), "Server is down, we are working to solve this problem");
+                    }
                 }
 
                 @Override
@@ -146,8 +159,5 @@ public class SignUpActivity extends BaseActivity {
     public void postNewUser() {
         User user = new User(this.login, this.password, SelectGenderActivity.gender);
         new Register(user);
-
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(intent);
     }
 }

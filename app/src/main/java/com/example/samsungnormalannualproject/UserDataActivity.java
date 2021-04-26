@@ -36,6 +36,11 @@ public class UserDataActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.activity_loading);
+        makeQuery();
+    }
+
+    private void makeQuery() {
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.JWTTokenSharedPreferencesKey), Context.MODE_PRIVATE);
         String JWTToken = sharedPref.getString(getString(R.string.JWTToken), "");
 
@@ -70,17 +75,21 @@ public class UserDataActivity extends BaseActivity {
                         startActivity(intent);
                     } else {
                         Intent intent = new Intent(getApplicationContext(), BottomMenu.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     }
                     editor.commit();
                 }
+
+                finish();
             }
 
             @Override
             public void onFailure(Call<RegisteredUser> call, Throwable t) {
                 Log.e("UserGetData", "сервер кажись лежит");
+                setContentView(R.layout.activity_no_connection);
+                makeQuery();
             }
         });
-
     }
 }

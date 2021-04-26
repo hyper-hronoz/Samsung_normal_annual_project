@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SamsungNormalAnnualProject"
         android:usesCleartextTraffic="true">
+        <activity android:name=".NoConnection"></activity>
         <activity android:name=".UploadImageActivity" />
         <activity android:name=".BottomMenu" />
         <activity android:name=".UserDataActivity" />

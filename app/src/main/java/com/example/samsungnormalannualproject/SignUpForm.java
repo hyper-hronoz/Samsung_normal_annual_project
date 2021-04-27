@@ -227,6 +227,7 @@ public class SignUpForm extends BaseActivity {
             String facebookLink = this.facebook.getText().toString().trim();
             String vkLink = this.vk.getText().toString().trim();
 
+            Log.d("Instagram link", String.valueOf(instagramLink));
             Log.d("User height", String.valueOf(height));
             Log.d("User age", String.valueOf(age));
             Log.d("User about", String.valueOf(aboutUser));
@@ -239,6 +240,7 @@ public class SignUpForm extends BaseActivity {
                 Log.i("",num+" is a number");
             } catch (NumberFormatException e) {
                 new ToastError(getApplicationContext(), "Height is not a number");
+                return;
             }
             try {
                 int num = Integer.parseInt(age);
@@ -247,30 +249,36 @@ public class SignUpForm extends BaseActivity {
             } catch (NumberFormatException e) {
                 Log.i("",age+" is not a number");
                 new ToastError(getApplicationContext(), "Age is not a number");
+                return;
             }
             if (aboutUser != "") {
                 registeredUser.setAboutUser(aboutUser);
             }
             else if (aboutUser.length() < 30) {
                 new ToastError(getApplicationContext(), "About user must contains not less than 30 symbols");
+                return;
             } else {
                 new ToastError(getApplicationContext(), "About user is incorrect");
+                return;
             }
             if (eyesColor != "") {
                 registeredUser.setEyesColor(eyesColor);
             } else {
                 new ToastError(getApplicationContext(), "Eys color is incorrect");
+                return;
             }
             if (hairsColor != "") {
                 registeredUser.setHairColor(hairsColor);
             } else {
                 new ToastError(getApplicationContext(), "Hair color is incorrect");
+                return;
             }
             if (facebookLink == "" && instagramLink == "" && vkLink == "") {
                 new ToastError(getApplicationContext(), "Not less than one social link");
+                return;
             }
             registeredUser.setVkProfile(vkLink);
-            registeredUser.setInstagramProfle(instagramLink);
+            registeredUser.setInstagramProfile(instagramLink);
             registeredUser.setFacebookProfile(facebookLink);
         } catch (Error e) {
             Log.e("SingUpForm error" , e.getMessage());

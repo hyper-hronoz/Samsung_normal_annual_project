@@ -183,7 +183,7 @@ public class Liked extends Fragment {
         Log.d("item clicked", String.valueOf(position) + "; " + social);
         Uri uri = null;
         if (social == "instagram") {
-            uri = Uri.parse(this.registeredUsers.get(position).instagramProfle);
+            uri = Uri.parse(this.registeredUsers.get(position).instagramProfile);
         }
         if (social == "vk") {
             uri = Uri.parse(this.registeredUsers.get(position).vkProfile);

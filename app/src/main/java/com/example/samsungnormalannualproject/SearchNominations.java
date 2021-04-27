@@ -226,8 +226,8 @@ public class SearchNominations extends Fragment {
 
     private void chat() {
         Uri uri = null;
-        if (URLUtil.isValidUrl(registeredUser.getInstagramProfle())) {
-            uri = Uri.parse(registeredUser.getInstagramProfle());
+        if (URLUtil.isValidUrl(registeredUser.getInstagramProfile())) {
+            uri = Uri.parse(registeredUser.getInstagramProfile());
         }
         if (URLUtil.isValidUrl(registeredUser.getVkProfile())) {
             uri = Uri.parse(registeredUser.getVkProfile());

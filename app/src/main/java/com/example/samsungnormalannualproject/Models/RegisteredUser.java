@@ -15,7 +15,7 @@ public class RegisteredUser extends User  {
     public String eyesColor;
     public String aboutUser;
     public String userPhoto;
-    public String instagramProfle;
+    public String instagramProfile;
     public String facebookProfile;
     public String vkProfile;
     public List<String> userLiked;
@@ -28,7 +28,7 @@ public class RegisteredUser extends User  {
         this.userLiked = userLiked;
     }
 
-    public RegisteredUser(String aboutUser, int age, String eyesColor, String hairColor, int height, String userPhoto, String username, String vkProfile, String facebookProfile, String instagramProfle, List<String> userLiked) {
+    public RegisteredUser(String aboutUser, int age, String eyesColor, String hairColor, int height, String userPhoto, String username, String vkProfile, String facebookProfile, String instagramProfile, List<String> userLiked) {
         super(username);
         this.aboutUser = aboutUser;
         this.age = age;
@@ -38,7 +38,7 @@ public class RegisteredUser extends User  {
         this.userPhoto = userPhoto;
         this.vkProfile = vkProfile;
         this.facebookProfile = facebookProfile;
-        this.instagramProfle = instagramProfle;
+        this.instagramProfile = instagramProfile;
         this.userLiked = userLiked;
     }
 
@@ -47,8 +47,8 @@ public class RegisteredUser extends User  {
         super(username, password, gender);
     }
 
-    public void setInstagramProfle(String instagramProfle) {
-        this.instagramProfle = instagramProfle;
+    public void setInstagramProfile(String instagramProfile) {
+        this.instagramProfile = instagramProfile;
     }
 
     public void setFacebookProfile(String facebookProfile) {
@@ -59,8 +59,8 @@ public class RegisteredUser extends User  {
         this.vkProfile = vkProfile;
     }
 
-    public String getInstagramProfle() {
-        return instagramProfle;
+    public String getInstagramProfile() {
+        return instagramProfile;
     }
 
     public String getFacebookProfile() {
@@ -71,13 +71,13 @@ public class RegisteredUser extends User  {
         return vkProfile;
     }
 
-    public RegisteredUser(String username, int age, String hairColor, String eyesColor, String aboutUser, String userPhoto, String instagramProfle, String facebookProfile, String vkProfile) {
+    public RegisteredUser(String username, int age, String hairColor, String eyesColor, String aboutUser, String userPhoto, String instagramProfile, String facebookProfile, String vkProfile) {
         super(username);
         this.aboutUser = aboutUser;
         this.hairColor = hairColor;
         this.eyesColor = eyesColor;
         this.userPhoto = userPhoto;
-        this.instagramProfle = instagramProfle;
+        this.instagramProfile = instagramProfile;
         this.facebookProfile = facebookProfile;
         this.vkProfile = vkProfile;
     }

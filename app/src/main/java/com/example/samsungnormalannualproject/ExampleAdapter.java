@@ -112,7 +112,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         if (URLUtil.isValidUrl(currentItem.userPhoto)){
             Glide.with(activity.getApplicationContext()).load(currentItem.getUserPhoto()).into(holder.userPhoto);
         }
-        if (!URLUtil.isValidUrl(currentItem.instagramProfle)) {
+        if (!URLUtil.isValidUrl(currentItem.instagramProfile)) {
             holder.instagram.setVisibility(View.GONE);
         }
 

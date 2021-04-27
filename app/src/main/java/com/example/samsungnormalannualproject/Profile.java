@@ -148,6 +148,10 @@ public class Profile extends Fragment {
             @Override
             public void onFailure(Call<RegisteredUser> call, Throwable t) {
                 Log.e("UserGetData", "сервер кажись лежит");
+                Log.e("Login error ", t.getMessage());
+                Intent intent = new Intent(getActivity().getApplicationContext(), UserDataActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
     }

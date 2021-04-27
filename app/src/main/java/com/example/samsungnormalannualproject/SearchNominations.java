@@ -213,6 +213,9 @@ public class SearchNominations extends Fragment {
             @Override
             public void onFailure(Call<RegisteredUser> call, Throwable t) {
                 Log.e("Search error", t.getMessage());
+                Intent intent = new Intent(getActivity().getApplicationContext(), UserDataActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
     }

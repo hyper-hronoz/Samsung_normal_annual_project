@@ -162,6 +162,9 @@ public class Liked extends Fragment {
             @Override
             public void onFailure(Call<RegisteredUsers> call, Throwable t) {
                 Log.e("UserGetData", t.getMessage());
+                Intent intent = new Intent(getActivity().getApplicationContext(), UserDataActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
     }

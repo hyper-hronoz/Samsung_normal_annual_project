@@ -1,109 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/findUserView"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:padding="16dp"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/firstInfo"
-        android:weightSum="2">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/nomination_heading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:fontFamily="@font/nunito_semibold"
-                android:text="................."
-                android:textColor="@color/black"
-                android:textSize="33dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="1"
-            android:gravity="right">
-
-            <TextView
-                android:id="@+id/nomination_age"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:fontFamily="@font/nunito_semibold"
-                android:paddingBottom="4dp"
-                android:text="......"
-                android:textColor="@color/black"
-                android:textSize="16dp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/profilePhoto"
+    <RelativeLayout
+        android:id="@+id/findUserView"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/firstInfo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
-        android:adjustViewBounds="true"
-        app:srcCompat="@drawable/depositphotos_134255710_stock_illustration_avatar_vector_male_profile_gray__1_"
-        tools:ignore="VectorDrawableCompat" />
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/about"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/profilePhoto"
-        android:layout_alignStart="@+id/profilePhoto"
-        android:layout_alignLeft="@+id/profilePhoto"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="16dp"
-        android:gravity="left"
-        android:text="................................................."
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <LinearLayout
+            android:id="@+id/firstInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/about"
-        android:layout_marginTop="20dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
-        <ImageButton
-            android:id="@+id/like"
-            style="@style/view_nomination_icon"
-            app:srcCompat="@drawable/ic_heart"
+                <TextView
+                    android:id="@+id/nomination_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="................."
+                    android:textColor="@color/black"
+                    android:textSize="33dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:gravity="right">
+
+                <TextView
+                    android:id="@+id/nomination_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:paddingBottom="4dp"
+                    android:text="......"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/profilePhoto"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/firstInfo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="17dp"
+            android:adjustViewBounds="true"
+            app:srcCompat="@drawable/depositphotos_134255710_stock_illustration_avatar_vector_male_profile_gray__1_"
             tools:ignore="VectorDrawableCompat" />
 
-        <ImageButton
-            style="@style/view_nomination_icon"
-            app:srcCompat="@drawable/ic_chat"
-            tools:ignore="VectorDrawableCompat" />
+        <TextView
+            android:id="@+id/about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profilePhoto"
+            android:layout_alignStart="@+id/profilePhoto"
+            android:layout_alignLeft="@+id/profilePhoto"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="16dp"
+            android:gravity="left"
+            android:text="................................................."
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageButton
-            style="@style/view_nomination_icon"
-            app:srcCompat="@drawable/ic_show_more_button_with_three_dots"
-            tools:ignore="VectorDrawableCompat" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about"
+            android:layout_marginTop="20dp">
 
-    </LinearLayout>
+            <ImageButton
+                android:id="@+id/like"
+                style="@style/view_nomination_icon"
+                app:srcCompat="@drawable/ic_heart"
+                tools:ignore="VectorDrawableCompat" />
 
+            <ImageButton
+                style="@style/view_nomination_icon"
+                app:srcCompat="@drawable/ic_chat"
+                tools:ignore="VectorDrawableCompat" />
 
-</RelativeLayout>
+            <ImageButton
+                style="@style/view_nomination_icon"
+                app:srcCompat="@drawable/ic_show_more_button_with_three_dots"
+                tools:ignore="VectorDrawableCompat" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

@@ -2,6 +2,7 @@ package com.example.samsungnormalannualproject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.samsungnormalannualproject.Models.RegisteredUser;
 import com.example.samsungnormalannualproject.Models.RegisteredUsers;
 
@@ -107,6 +109,9 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
         RegisteredUser currentItem = mExampleList.get(position);
         holder.userHeading.setText(currentItem.getUsername());
+        if (URLUtil.isValidUrl(currentItem.userPhoto)){
+            Glide.with(activity.getApplicationContext()).load(currentItem.getUserPhoto()).into(holder.userPhoto);
+        }
         if (!URLUtil.isValidUrl(currentItem.instagramProfle)) {
             holder.instagram.setVisibility(View.GONE);
         }

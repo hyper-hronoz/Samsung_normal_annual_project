@@ -154,7 +154,7 @@ public class Profile extends Fragment {
 
     private void setCurrentUserData(RegisteredUser registeredUser) {
         this.nominationHeadingTextView.setText(registeredUser.getUsername());
-        this.nominationAgeTextView.setText(String.valueOf(registeredUser.getAge()));
+        this.nominationAgeTextView.setText("age " + String.valueOf(registeredUser.getAge()));
         this.aboutTextView.setText(registeredUser.getAboutUser());
         if (URLUtil.isValidUrl(registeredUser.getUserPhoto())) {
             Glide.with(getContext()).load(registeredUser.getUserPhoto()).into(this.profilePhotoImageView);

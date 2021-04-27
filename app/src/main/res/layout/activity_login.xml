@@ -1,31 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/login_view"
     android:layout_width="match_parent"
-    android:background="@drawable/select_gender_gradient_boy"
-    android:layout_height="match_parent"
-    tools:context=".SignUpActivity">
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    tools:context=".MainActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/login_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:layout_height="wrap_content"
+        android:background="@drawable/select_gender_gradient_boy"
+        tools:context=".SignUpForm">
 
         <TextView
             android:id="@+id/activity_heading"
             style="@style/activity_heading"
-            android:text="Login"/>
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center"
+            android:text="Login"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:layout_weight="80"
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
             android:background="@drawable/login_registrate_background"
             android:orientation="vertical"
-            android:padding="50dp">
+            android:paddingHorizontal="50dp"
+            android:paddingVertical="120dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_heading">
 
             <TextView
                 android:id="@+id/textView3"
@@ -51,19 +66,20 @@
             <Button
                 android:id="@+id/login_confirm"
                 style="@style/login_registrate_button"
-                android:text="Confirm"
                 android:layout_marginBottom="25dp"
+                android:text="Confirm"
                 app:backgroundTint="#00FFFFFF"
                 app:backgroundTintMode="src_over" />
 
             <TextView
                 android:id="@+id/haveAccount"
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="Do not have an account?" />
 
         </LinearLayout>
 
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

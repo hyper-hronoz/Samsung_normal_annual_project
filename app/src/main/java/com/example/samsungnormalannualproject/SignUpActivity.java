@@ -134,8 +134,10 @@ public class SignUpActivity extends BaseActivity {
 
                 @Override
                 public void onFailure(Call<NetworkServiceResponse> call, Throwable t) {
-                    System.out.println(t);
-                    System.out.println("failuuuuuuuuuuuuuuuuure");
+                    Log.e("Sign up failre", t.getMessage());
+                    Intent intent = new Intent(getApplicationContext(), UserDataActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             });
         }

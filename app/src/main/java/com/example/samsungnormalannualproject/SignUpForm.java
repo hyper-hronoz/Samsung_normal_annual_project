@@ -218,8 +218,8 @@ public class SignUpForm extends BaseActivity {
         RegisteredUser registeredUser = gson.fromJson(user, RegisteredUser.class);
 
         try {
-            int height = Integer.parseInt(this.userHeightEditText.getText().toString().trim());
-            int age = Integer.parseInt(this.userAgeEditText.getText().toString().trim());
+            String height = this.userHeightEditText.getText().toString().trim();
+            String age = this.userAgeEditText.getText().toString().trim();
             String aboutUser = this.userAboutEditText.getText().toString().trim();
             String eyesColor = this.eyesColorEditText.getText().toString().trim();
             String hairsColor = this.hairColorEditText.getText().toString().trim();
@@ -233,15 +233,20 @@ public class SignUpForm extends BaseActivity {
             Log.d("User eyesColor", String.valueOf(eyesColor));
             Log.d("User hairsColor", String.valueOf(hairsColor));
 
-            if (height != 0) {
-                registeredUser.setHeight(height);
-            } else {
-                new ToastError(getApplicationContext(), "Height must be number");
+            try {
+                int num = Integer.parseInt(height);
+                registeredUser.setHeight(num);
+                Log.i("",num+" is a number");
+            } catch (NumberFormatException e) {
+                new ToastError(getApplicationContext(), "Height is not a number");
             }
-            if (age != 0) {
-                registeredUser.setAge(age);
-            } else {
-                new ToastError(getApplicationContext(), "Age must be number");
+            try {
+                int num = Integer.parseInt(age);
+                registeredUser.setAge(num);
+                Log.i("",num+" is a number");
+            } catch (NumberFormatException e) {
+                Log.i("",age+" is not a number");
+                new ToastError(getApplicationContext(), "Age is not a number");
             }
             if (aboutUser != "") {
                 registeredUser.setAboutUser(aboutUser);

@@ -149,7 +149,10 @@ public class LoginActivity extends BaseActivity {
 
                 @Override
                 public void onFailure(Call<NetworkServiceResponse> call, Throwable t) {
-                    System.out.println("Failure");
+                    Log.e("Login error ", t.getMessage());
+                    Intent intent = new Intent(getApplicationContext(), UserDataActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             });
         }

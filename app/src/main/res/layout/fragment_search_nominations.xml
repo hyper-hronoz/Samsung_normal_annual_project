@@ -100,12 +100,14 @@
                 tools:ignore="VectorDrawableCompat" />
 
             <ImageButton
+                android:id="@+id/chat"
                 style="@style/view_nomination_icon"
                 app:srcCompat="@drawable/ic_chat"
                 tools:ignore="VectorDrawableCompat" />
 
             <ImageButton
                 style="@style/view_nomination_icon"
+                android:visibility="gone"
                 app:srcCompat="@drawable/ic_show_more_button_with_three_dots"
                 tools:ignore="VectorDrawableCompat" />
 

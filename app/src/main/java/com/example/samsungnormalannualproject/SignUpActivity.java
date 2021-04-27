@@ -104,6 +104,8 @@ public class SignUpActivity extends BaseActivity {
             Log.d("user userpassword", user.password);
 
             this.user = user;
+
+            setContentView(R.layout.activity_loading);
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(NetworkConfig.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())

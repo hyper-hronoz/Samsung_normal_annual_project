@@ -115,6 +115,8 @@ public class LoginActivity extends BaseActivity {
     public class Login {
         User user;
         public Login(User user, Context context) {
+
+            setContentView(R.layout.activity_loading);
             this.user = user;
             System.out.println("Что отправляем: " + new GsonBuilder().setPrettyPrinting().create().toJson(user));
 

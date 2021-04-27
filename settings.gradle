@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "Samsung normal annual project"
+rootProject.name = "FriendsApp"

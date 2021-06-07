@@ -48,4 +48,11 @@ public interface JSONPlaceHolderApi {
 
     @GET("/action/liked")
     Call<RegisteredUsers> getLikedUsers(@Header("Authorization") String token);
+
+    @Multipart
+    @POST("/upload")
+    Call<ResponseBody> upload(
+            @Part("sender_information") RequestBody description,
+            @Part MultipartBody.Part file);
 }
+
